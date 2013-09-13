@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55D3373C17E32B8100B9A64E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373B17E32B8100B9A64E /* Foundation.framework */; };
+		55D3373E17E32B8100B9A64E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373D17E32B8100B9A64E /* CoreGraphics.framework */; };
+		55D3374017E32B8100B9A64E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373F17E32B8100B9A64E /* UIKit.framework */; };
+		55D3374217E32B8100B9A64E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3374117E32B8100B9A64E /* CoreData.framework */; };
+		55D3374817E32B8100B9A64E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55D3374617E32B8100B9A64E /* InfoPlist.strings */; };
+		55D3374A17E32B8100B9A64E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3374917E32B8100B9A64E /* main.m */; };
+		55D3374E17E32B8100B9A64E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3374D17E32B8100B9A64E /* AppDelegate.m */; };
+		55D3375117E32B8100B9A64E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D3374F17E32B8100B9A64E /* Main.storyboard */; };
+		55D3375417E32B8100B9A64E /* iGoodFood.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */; };
+		55D3375717E32B8100B9A64E /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375617E32B8100B9A64E /* MasterViewController.m */; };
+		55D3375A17E32B8100B9A64E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375917E32B8100B9A64E /* DetailViewController.m */; };
+		55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D3375B17E32B8100B9A64E /* Images.xcassets */; };
+		55D3376317E32B8100B9A64E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3376217E32B8100B9A64E /* XCTest.framework */; };
+		55D3376417E32B8100B9A64E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373B17E32B8100B9A64E /* Foundation.framework */; };
+		55D3376517E32B8100B9A64E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373F17E32B8100B9A64E /* UIKit.framework */; };
+		55D3376617E32B8100B9A64E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3374117E32B8100B9A64E /* CoreData.framework */; };
+		55D3376E17E32B8100B9A64E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55D3376C17E32B8100B9A64E /* InfoPlist.strings */; };
+		55D3377017E32B8100B9A64E /* iGoodFoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3376F17E32B8100B9A64E /* iGoodFoodTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55D3376717E32B8100B9A64E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55D3373017E32B8100B9A64E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55D3373717E32B8100B9A64E;
+			remoteInfo = iGoodFood;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		55D3373817E32B8100B9A64E /* iGoodFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGoodFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D3373B17E32B8100B9A64E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		55D3373D17E32B8100B9A64E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		55D3373F17E32B8100B9A64E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		55D3374117E32B8100B9A64E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		55D3374517E32B8100B9A64E /* iGoodFood-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iGoodFood-Info.plist"; sourceTree = "<group>"; };
+		55D3374717E32B8100B9A64E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55D3374917E32B8100B9A64E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		55D3374B17E32B8100B9A64E /* iGoodFood-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iGoodFood-Prefix.pch"; sourceTree = "<group>"; };
+		55D3374C17E32B8100B9A64E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		55D3374D17E32B8100B9A64E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		55D3375017E32B8100B9A64E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		55D3375317E32B8100B9A64E /* iGoodFood.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iGoodFood.xcdatamodel; sourceTree = "<group>"; };
+		55D3375517E32B8100B9A64E /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		55D3375617E32B8100B9A64E /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		55D3375817E32B8100B9A64E /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		55D3375917E32B8100B9A64E /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		55D3375B17E32B8100B9A64E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		55D3376117E32B8100B9A64E /* iGoodFoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iGoodFoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D3376217E32B8100B9A64E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		55D3376B17E32B8100B9A64E /* iGoodFoodTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iGoodFoodTests-Info.plist"; sourceTree = "<group>"; };
+		55D3376D17E32B8100B9A64E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		55D3376F17E32B8100B9A64E /* iGoodFoodTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iGoodFoodTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55D3373517E32B8100B9A64E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3373E17E32B8100B9A64E /* CoreGraphics.framework in Frameworks */,
+				55D3374217E32B8100B9A64E /* CoreData.framework in Frameworks */,
+				55D3374017E32B8100B9A64E /* UIKit.framework in Frameworks */,
+				55D3373C17E32B8100B9A64E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55D3375E17E32B8100B9A64E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3376317E32B8100B9A64E /* XCTest.framework in Frameworks */,
+				55D3376617E32B8100B9A64E /* CoreData.framework in Frameworks */,
+				55D3376517E32B8100B9A64E /* UIKit.framework in Frameworks */,
+				55D3376417E32B8100B9A64E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55D3372F17E32B8100B9A64E = {
+			isa = PBXGroup;
+			children = (
+				55D3374317E32B8100B9A64E /* iGoodFood */,
+				55D3376917E32B8100B9A64E /* iGoodFoodTests */,
+				55D3373A17E32B8100B9A64E /* Frameworks */,
+				55D3373917E32B8100B9A64E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55D3373917E32B8100B9A64E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55D3373817E32B8100B9A64E /* iGoodFood.app */,
+				55D3376117E32B8100B9A64E /* iGoodFoodTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55D3373A17E32B8100B9A64E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55D3373B17E32B8100B9A64E /* Foundation.framework */,
+				55D3373D17E32B8100B9A64E /* CoreGraphics.framework */,
+				55D3373F17E32B8100B9A64E /* UIKit.framework */,
+				55D3374117E32B8100B9A64E /* CoreData.framework */,
+				55D3376217E32B8100B9A64E /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55D3374317E32B8100B9A64E /* iGoodFood */ = {
+			isa = PBXGroup;
+			children = (
+				55D3374C17E32B8100B9A64E /* AppDelegate.h */,
+				55D3374D17E32B8100B9A64E /* AppDelegate.m */,
+				55D3374F17E32B8100B9A64E /* Main.storyboard */,
+				55D3375517E32B8100B9A64E /* MasterViewController.h */,
+				55D3375617E32B8100B9A64E /* MasterViewController.m */,
+				55D3375817E32B8100B9A64E /* DetailViewController.h */,
+				55D3375917E32B8100B9A64E /* DetailViewController.m */,
+				55D3375B17E32B8100B9A64E /* Images.xcassets */,
+				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
+				55D3374417E32B8100B9A64E /* Supporting Files */,
+			);
+			path = iGoodFood;
+			sourceTree = "<group>";
+		};
+		55D3374417E32B8100B9A64E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55D3374517E32B8100B9A64E /* iGoodFood-Info.plist */,
+				55D3374617E32B8100B9A64E /* InfoPlist.strings */,
+				55D3374917E32B8100B9A64E /* main.m */,
+				55D3374B17E32B8100B9A64E /* iGoodFood-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55D3376917E32B8100B9A64E /* iGoodFoodTests */ = {
+			isa = PBXGroup;
+			children = (
+				55D3376F17E32B8100B9A64E /* iGoodFoodTests.m */,
+				55D3376A17E32B8100B9A64E /* Supporting Files */,
+			);
+			path = iGoodFoodTests;
+			sourceTree = "<group>";
+		};
+		55D3376A17E32B8100B9A64E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				55D3376B17E32B8100B9A64E /* iGoodFoodTests-Info.plist */,
+				55D3376C17E32B8100B9A64E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55D3373717E32B8100B9A64E /* iGoodFood */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55D3377317E32B8100B9A64E /* Build configuration list for PBXNativeTarget "iGoodFood" */;
+			buildPhases = (
+				55D3373417E32B8100B9A64E /* Sources */,
+				55D3373517E32B8100B9A64E /* Frameworks */,
+				55D3373617E32B8100B9A64E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iGoodFood;
+			productName = iGoodFood;
+			productReference = 55D3373817E32B8100B9A64E /* iGoodFood.app */;
+			productType = "com.apple.product-type.application";
+		};
+		55D3376017E32B8100B9A64E /* iGoodFoodTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55D3377617E32B8100B9A64E /* Build configuration list for PBXNativeTarget "iGoodFoodTests" */;
+			buildPhases = (
+				55D3375D17E32B8100B9A64E /* Sources */,
+				55D3375E17E32B8100B9A64E /* Frameworks */,
+				55D3375F17E32B8100B9A64E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55D3376817E32B8100B9A64E /* PBXTargetDependency */,
+			);
+			name = iGoodFoodTests;
+			productName = iGoodFoodTests;
+			productReference = 55D3376117E32B8100B9A64E /* iGoodFoodTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55D3373017E32B8100B9A64E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = MentorMate;
+				TargetAttributes = {
+					55D3376017E32B8100B9A64E = {
+						TestTargetID = 55D3373717E32B8100B9A64E;
+					};
+				};
+			};
+			buildConfigurationList = 55D3373317E32B8100B9A64E /* Build configuration list for PBXProject "iGoodFood" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55D3372F17E32B8100B9A64E;
+			productRefGroup = 55D3373917E32B8100B9A64E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55D3373717E32B8100B9A64E /* iGoodFood */,
+				55D3376017E32B8100B9A64E /* iGoodFoodTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55D3373617E32B8100B9A64E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */,
+				55D3374817E32B8100B9A64E /* InfoPlist.strings in Resources */,
+				55D3375117E32B8100B9A64E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55D3375F17E32B8100B9A64E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3376E17E32B8100B9A64E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55D3373417E32B8100B9A64E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3375A17E32B8100B9A64E /* DetailViewController.m in Sources */,
+				55D3375717E32B8100B9A64E /* MasterViewController.m in Sources */,
+				55D3375417E32B8100B9A64E /* iGoodFood.xcdatamodeld in Sources */,
+				55D3374E17E32B8100B9A64E /* AppDelegate.m in Sources */,
+				55D3374A17E32B8100B9A64E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55D3375D17E32B8100B9A64E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55D3377017E32B8100B9A64E /* iGoodFoodTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		55D3376817E32B8100B9A64E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55D3373717E32B8100B9A64E /* iGoodFood */;
+			targetProxy = 55D3376717E32B8100B9A64E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		55D3374617E32B8100B9A64E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D3374717E32B8100B9A64E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		55D3374F17E32B8100B9A64E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D3375017E32B8100B9A64E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		55D3376C17E32B8100B9A64E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55D3376D17E32B8100B9A64E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		55D3377117E32B8100B9A64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		55D3377217E32B8100B9A64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		55D3377417E32B8100B9A64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGoodFood/iGoodFood-Prefix.pch";
+				INFOPLIST_FILE = "iGoodFood/iGoodFood-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		55D3377517E32B8100B9A64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGoodFood/iGoodFood-Prefix.pch";
+				INFOPLIST_FILE = "iGoodFood/iGoodFood-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		55D3377717E32B8100B9A64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iGoodFood.app/iGoodFood";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGoodFood/iGoodFood-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iGoodFoodTests/iGoodFoodTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		55D3377817E32B8100B9A64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iGoodFood.app/iGoodFood";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iGoodFood/iGoodFood-Prefix.pch";
+				INFOPLIST_FILE = "iGoodFoodTests/iGoodFoodTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55D3373317E32B8100B9A64E /* Build configuration list for PBXProject "iGoodFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55D3377117E32B8100B9A64E /* Debug */,
+				55D3377217E32B8100B9A64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55D3377317E32B8100B9A64E /* Build configuration list for PBXNativeTarget "iGoodFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55D3377417E32B8100B9A64E /* Debug */,
+				55D3377517E32B8100B9A64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		55D3377617E32B8100B9A64E /* Build configuration list for PBXNativeTarget "iGoodFoodTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55D3377717E32B8100B9A64E /* Debug */,
+				55D3377817E32B8100B9A64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				55D3375317E32B8100B9A64E /* iGoodFood.xcdatamodel */,
+			);
+			currentVersion = 55D3375317E32B8100B9A64E /* iGoodFood.xcdatamodel */;
+			path = iGoodFood.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 55D3373017E32B8100B9A64E /* Project object */;
+}
