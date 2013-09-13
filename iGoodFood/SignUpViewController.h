@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SignUpViewController.h
 //  iGoodFood
 //
 //  Created by Ivelin Ivanov on 9/13/13.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface SignUpViewController : UIViewController
 
 @end

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5592A18D17E3634D00288BB9 /* RecipieCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A18C17E3634D00288BB9 /* RecipieCategory.m */; };
+		5592A19017E367D600288BB9 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A18F17E367D600288BB9 /* CategoryCell.m */; };
+		5592A19217E36C0600288BB9 /* recipie.png in Resources */ = {isa = PBXBuildFile; fileRef = 5592A19117E36C0600288BB9 /* recipie.png */; };
+		5592A19517E36E0900288BB9 /* RecipieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A19417E36E0900288BB9 /* RecipieViewController.m */; };
+		5592A19917E36F8C00288BB9 /* RecipieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A19817E36F8C00288BB9 /* RecipieCell.m */; };
+		5592A19C17E371B300288BB9 /* AddRecipieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A19B17E371B300288BB9 /* AddRecipieViewController.m */; };
 		55D3373C17E32B8100B9A64E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373B17E32B8100B9A64E /* Foundation.framework */; };
 		55D3373E17E32B8100B9A64E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373D17E32B8100B9A64E /* CoreGraphics.framework */; };
 		55D3374017E32B8100B9A64E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373F17E32B8100B9A64E /* UIKit.framework */; };
@@ -16,8 +22,6 @@
 		55D3374E17E32B8100B9A64E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3374D17E32B8100B9A64E /* AppDelegate.m */; };
 		55D3375117E32B8100B9A64E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55D3374F17E32B8100B9A64E /* Main.storyboard */; };
 		55D3375417E32B8100B9A64E /* iGoodFood.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */; };
-		55D3375717E32B8100B9A64E /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375617E32B8100B9A64E /* MasterViewController.m */; };
-		55D3375A17E32B8100B9A64E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3375917E32B8100B9A64E /* DetailViewController.m */; };
 		55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55D3375B17E32B8100B9A64E /* Images.xcassets */; };
 		55D3376317E32B8100B9A64E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3376217E32B8100B9A64E /* XCTest.framework */; };
 		55D3376417E32B8100B9A64E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3373B17E32B8100B9A64E /* Foundation.framework */; };
@@ -25,6 +29,12 @@
 		55D3376617E32B8100B9A64E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D3374117E32B8100B9A64E /* CoreData.framework */; };
 		55D3376E17E32B8100B9A64E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55D3376C17E32B8100B9A64E /* InfoPlist.strings */; };
 		55D3377017E32B8100B9A64E /* iGoodFoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3376F17E32B8100B9A64E /* iGoodFoodTests.m */; };
+		55D3377B17E32C0700B9A64E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3377A17E32C0700B9A64E /* LoginViewController.m */; };
+		55D3378417E333AF00B9A64E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3378317E333AF00B9A64E /* SignUpViewController.m */; };
+		55D3379217E34A5E00B9A64E /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D3379117E34A5E00B9A64E /* CategoryViewController.m */; };
+		55D337A717E34E2400B9A64E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D337A617E34E2400B9A64E /* User.m */; };
+		55D337AA17E34E5900B9A64E /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D337A917E34E5900B9A64E /* DataModel.m */; };
+		55D337BD17E35D6D00B9A64E /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D337BC17E35D6D00B9A64E /* NSString+Encrypt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +48,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5592A18B17E3634D00288BB9 /* RecipieCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipieCategory.h; sourceTree = "<group>"; };
+		5592A18C17E3634D00288BB9 /* RecipieCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipieCategory.m; sourceTree = "<group>"; };
+		5592A18E17E367D600288BB9 /* CategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCell.h; sourceTree = "<group>"; };
+		5592A18F17E367D600288BB9 /* CategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
+		5592A19117E36C0600288BB9 /* recipie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recipie.png; sourceTree = "<group>"; };
+		5592A19317E36E0900288BB9 /* RecipieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipieViewController.h; sourceTree = "<group>"; };
+		5592A19417E36E0900288BB9 /* RecipieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipieViewController.m; sourceTree = "<group>"; };
+		5592A19717E36F8C00288BB9 /* RecipieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipieCell.h; sourceTree = "<group>"; };
+		5592A19817E36F8C00288BB9 /* RecipieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipieCell.m; sourceTree = "<group>"; };
+		5592A19A17E371B300288BB9 /* AddRecipieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipieViewController.h; sourceTree = "<group>"; };
+		5592A19B17E371B300288BB9 /* AddRecipieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipieViewController.m; sourceTree = "<group>"; };
 		55D3373817E32B8100B9A64E /* iGoodFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iGoodFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D3373B17E32B8100B9A64E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55D3373D17E32B8100B9A64E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,16 +72,24 @@
 		55D3374D17E32B8100B9A64E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55D3375017E32B8100B9A64E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55D3375317E32B8100B9A64E /* iGoodFood.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iGoodFood.xcdatamodel; sourceTree = "<group>"; };
-		55D3375517E32B8100B9A64E /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		55D3375617E32B8100B9A64E /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		55D3375817E32B8100B9A64E /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		55D3375917E32B8100B9A64E /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		55D3375B17E32B8100B9A64E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55D3376117E32B8100B9A64E /* iGoodFoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iGoodFoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D3376217E32B8100B9A64E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		55D3376B17E32B8100B9A64E /* iGoodFoodTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iGoodFoodTests-Info.plist"; sourceTree = "<group>"; };
 		55D3376D17E32B8100B9A64E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55D3376F17E32B8100B9A64E /* iGoodFoodTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iGoodFoodTests.m; sourceTree = "<group>"; };
+		55D3377917E32C0700B9A64E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		55D3377A17E32C0700B9A64E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		55D3378217E333AF00B9A64E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		55D3378317E333AF00B9A64E /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		55D3379017E34A5E00B9A64E /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
+		55D3379117E34A5E00B9A64E /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		55D337A517E34E2400B9A64E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../User.h; sourceTree = "<group>"; };
+		55D337A617E34E2400B9A64E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../User.m; sourceTree = "<group>"; };
+		55D337A817E34E5900B9A64E /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		55D337A917E34E5900B9A64E /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		55D337BB17E35D6D00B9A64E /* NSString+Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encrypt.h"; sourceTree = "<group>"; };
+		55D337BC17E35D6D00B9A64E /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +118,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5592A19617E36F6B00288BB9 /* RecipieViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5592A19317E36E0900288BB9 /* RecipieViewController.h */,
+				5592A19417E36E0900288BB9 /* RecipieViewController.m */,
+				5592A19717E36F8C00288BB9 /* RecipieCell.h */,
+				5592A19817E36F8C00288BB9 /* RecipieCell.m */,
+			);
+			name = RecipieViewController;
+			sourceTree = "<group>";
+		};
+		5592A19D17E372BD00288BB9 /* AddRecipieViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5592A19A17E371B300288BB9 /* AddRecipieViewController.h */,
+				5592A19B17E371B300288BB9 /* AddRecipieViewController.m */,
+			);
+			name = AddRecipieViewController;
+			sourceTree = "<group>";
+		};
 		55D3372F17E32B8100B9A64E = {
 			isa = PBXGroup;
 			children = (
@@ -123,15 +172,15 @@
 		55D3374317E32B8100B9A64E /* iGoodFood */ = {
 			isa = PBXGroup;
 			children = (
-				55D3374C17E32B8100B9A64E /* AppDelegate.h */,
-				55D3374D17E32B8100B9A64E /* AppDelegate.m */,
+				55D3378817E33A0F00B9A64E /* App Delegate */,
 				55D3374F17E32B8100B9A64E /* Main.storyboard */,
-				55D3375517E32B8100B9A64E /* MasterViewController.h */,
-				55D3375617E32B8100B9A64E /* MasterViewController.m */,
-				55D3375817E32B8100B9A64E /* DetailViewController.h */,
-				55D3375917E32B8100B9A64E /* DetailViewController.m */,
-				55D3375B17E32B8100B9A64E /* Images.xcassets */,
 				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
+				55D3378A17E33A2B00B9A64E /* LoginViewController */,
+				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
+				55D337AB17E34ECD00B9A64E /* CategoryViewController */,
+				5592A19617E36F6B00288BB9 /* RecipieViewController */,
+				5592A19D17E372BD00288BB9 /* AddRecipieViewController */,
+				55D3378F17E34A0000B9A64E /* DataModel */,
 				55D3374417E32B8100B9A64E /* Supporting Files */,
 			);
 			path = iGoodFood;
@@ -140,6 +189,10 @@
 		55D3374417E32B8100B9A64E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5592A19117E36C0600288BB9 /* recipie.png */,
+				55D337BB17E35D6D00B9A64E /* NSString+Encrypt.h */,
+				55D337BC17E35D6D00B9A64E /* NSString+Encrypt.m */,
+				55D3375B17E32B8100B9A64E /* Images.xcassets */,
 				55D3374517E32B8100B9A64E /* iGoodFood-Info.plist */,
 				55D3374617E32B8100B9A64E /* InfoPlist.strings */,
 				55D3374917E32B8100B9A64E /* main.m */,
@@ -164,6 +217,57 @@
 				55D3376C17E32B8100B9A64E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55D3378817E33A0F00B9A64E /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				55D3374C17E32B8100B9A64E /* AppDelegate.h */,
+				55D3374D17E32B8100B9A64E /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		55D3378A17E33A2B00B9A64E /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				55D3377917E32C0700B9A64E /* LoginViewController.h */,
+				55D3377A17E32C0700B9A64E /* LoginViewController.m */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		55D3378B17E33A3A00B9A64E /* SignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				55D3378217E333AF00B9A64E /* SignUpViewController.h */,
+				55D3378317E333AF00B9A64E /* SignUpViewController.m */,
+			);
+			name = SignUpViewController;
+			sourceTree = "<group>";
+		};
+		55D3378F17E34A0000B9A64E /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				5592A18B17E3634D00288BB9 /* RecipieCategory.h */,
+				5592A18C17E3634D00288BB9 /* RecipieCategory.m */,
+				55D337A817E34E5900B9A64E /* DataModel.h */,
+				55D337A917E34E5900B9A64E /* DataModel.m */,
+				55D337A517E34E2400B9A64E /* User.h */,
+				55D337A617E34E2400B9A64E /* User.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		55D337AB17E34ECD00B9A64E /* CategoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5592A18E17E367D600288BB9 /* CategoryCell.h */,
+				5592A18F17E367D600288BB9 /* CategoryCell.m */,
+				55D3379017E34A5E00B9A64E /* CategoryViewController.h */,
+				55D3379117E34A5E00B9A64E /* CategoryViewController.m */,
+			);
+			name = CategoryViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */,
+				5592A19217E36C0600288BB9 /* recipie.png in Resources */,
 				55D3374817E32B8100B9A64E /* InfoPlist.strings in Resources */,
 				55D3375117E32B8100B9A64E /* Main.storyboard in Resources */,
 			);
@@ -263,9 +368,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55D3375A17E32B8100B9A64E /* DetailViewController.m in Sources */,
-				55D3375717E32B8100B9A64E /* MasterViewController.m in Sources */,
+				55D337BD17E35D6D00B9A64E /* NSString+Encrypt.m in Sources */,
+				55D3379217E34A5E00B9A64E /* CategoryViewController.m in Sources */,
+				55D337AA17E34E5900B9A64E /* DataModel.m in Sources */,
+				55D337A717E34E2400B9A64E /* User.m in Sources */,
+				5592A19C17E371B300288BB9 /* AddRecipieViewController.m in Sources */,
+				55D3377B17E32C0700B9A64E /* LoginViewController.m in Sources */,
+				55D3378417E333AF00B9A64E /* SignUpViewController.m in Sources */,
+				5592A19517E36E0900288BB9 /* RecipieViewController.m in Sources */,
 				55D3375417E32B8100B9A64E /* iGoodFood.xcdatamodeld in Sources */,
+				5592A19017E367D600288BB9 /* CategoryCell.m in Sources */,
+				5592A19917E36F8C00288BB9 /* RecipieCell.m in Sources */,
+				5592A18D17E3634D00288BB9 /* RecipieCategory.m in Sources */,
 				55D3374E17E32B8100B9A64E /* AppDelegate.m in Sources */,
 				55D3374A17E32B8100B9A64E /* main.m in Sources */,
 			);
@@ -476,6 +590,7 @@
 				55D3377517E32B8100B9A64E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55D3377617E32B8100B9A64E /* Build configuration list for PBXNativeTarget "iGoodFoodTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +599,7 @@
 				55D3377817E32B8100B9A64E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

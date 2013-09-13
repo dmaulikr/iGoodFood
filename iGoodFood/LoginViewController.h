@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  LoginViewController.h
 //  iGoodFood
 //
 //  Created by Ivelin Ivanov on 9/13/13.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface LoginViewController : UIViewController
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 
 @end
