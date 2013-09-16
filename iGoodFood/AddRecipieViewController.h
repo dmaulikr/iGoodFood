@@ -10,10 +10,12 @@
 #import "User.h"
 #import "RecipieCategory.h"
 #import "DataModel.h"
+#import "Recipie.h"
 
-@interface AddRecipieViewController : UIViewController
+@interface AddRecipieViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) User *currentUser;
 @property (strong, nonatomic) RecipieCategory *currentCategory;
+@property (strong, nonatomic) Recipie *recipieToEdit;
 
 @end

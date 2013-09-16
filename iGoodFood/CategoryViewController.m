@@ -11,6 +11,7 @@
 #import "CategoryCell.h"
 #import "RecipieCategory.h"
 #import "RecipieViewController.h"
+#import "Recipie.h"
 
 @interface CategoryViewController ()
 {
@@ -43,6 +44,8 @@
     [self viewWillAppear:animated];
     
     self.navigationItem.hidesBackButton = YES;
+    
+    [self loadCategories];
 }
 
 - (void)loadCategories
@@ -69,6 +72,18 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Category" message:@"Enter category name:" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
+}
+
+- (void)categoryLongPressed:(UIGestureRecognizer *)recognizer
+{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"What do you want?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+        [sheet showInView:recognizer.view];
+        
+        CategoryCell *cell = (CategoryCell *)recognizer.view;
+        
+        selectedCategory = [DataModel getCategoryForName:cell.categoryNameLabel.text];
+    }
 }
 
 #pragma mark - Alert View Delegate Methods
@@ -114,8 +129,28 @@
     CategoryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
     cell.categoryNameLabel.text = [(RecipieCategory *)categories[indexPath.row] name];
-    cell.categoryImage.image = [UIImage imageNamed:@"recipie.png"];
-    cell.categoryImage.contentMode = UIViewContentModeScaleAspectFit;
+    
+    if ([[(RecipieCategory *)categories[indexPath.row] recipies] count] > 0)
+    {
+        RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
+        Recipie *recipie = (Recipie *)[[category.recipies allObjects] objectAtIndex:0];
+        
+        NSData *imageData = recipie.image;
+        
+        cell.categoryImage.image = [UIImage imageWithData:imageData];
+    }
+    else
+    {
+        cell.categoryImage.image = [UIImage imageNamed:@"recipie.png"];
+        cell.categoryImage.contentMode = UIViewContentModeScaleAspectFit;
+    }
+
+    
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLongPressed:)];
+    [cell addGestureRecognizer:longPressRecognizer];
+    
+    cell.categoryImage.layer.cornerRadius = 15;
+    cell.categoryImage.clipsToBounds = YES;
     
     return cell;
 }
@@ -132,6 +167,17 @@
     
     destination.currentUser = self.currentUser;
     destination.currentCategory = selectedCategory;
+}
+
+#pragma mark - Action Sheet Delegate Methods
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [DataModel deleteCategory:selectedCategory];
+        [self loadCategories];
+    }
 }
 
 @end

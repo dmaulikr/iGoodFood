@@ -15,5 +15,13 @@
 + (User *)getUserForUsername:(NSString *)username andPassword:(NSString *)password;
 + (BOOL)createCategoryWithName:(NSString *)categoryName forUser:(User *)user;
 + (NSArray *)getCategoriesForUser:(User *)user;
++ (BOOL)createRecipieWithName:(NSString *)recipieName description:(NSString *)description cookingTime:(NSInteger)cookingTime image:(UIImage *) image ingredients:(NSString *)ingredients howToCook:(NSString *)howToCook forUser:(User *)user andCategory:(RecipieCategory *)category;
++ (NSArray *)getRecipiesForCategory:(RecipieCategory *)category;
++ (Recipie *)getRecipieForName:(NSString *)name;
++ (void)deleteRecipie:(Recipie *)recipie;
++ (RecipieCategory *)getCategoryForName:(NSString *)name;
++ (void)deleteCategory:(RecipieCategory *)category;
++ (void)saveContext;
++ (void)addTagsFromArray:(NSArray *)array forRecipe:(Recipie *)recipie;
 
 @end

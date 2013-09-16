@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C869F232-81CF-44FD-B10D-C67D3B91AB9C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iGoodFood</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2EF4B65B-6562-420F-B029-D94CC09F0974</key>
+		<string>https://github.com/ivelinivanov/iGoodFood.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iGoodFood.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2EF4B65B-6562-420F-B029-D94CC09F0974</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ivelinivanov/iGoodFood.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2EF4B65B-6562-420F-B029-D94CC09F0974</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2EF4B65B-6562-420F-B029-D94CC09F0974</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iGoodFood</string>
+		</dict>
+	</array>
+</dict>
+</plist>

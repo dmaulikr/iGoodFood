@@ -10,7 +10,7 @@
 #import "User.h"
 #import "RecipieCategory.h"
 
-@interface RecipieViewController : UICollectionViewController
+@interface RecipieViewController : UICollectionViewController <UIActionSheetDelegate>
 
 @property (strong, nonatomic) User *currentUser;
 @property (strong, nonatomic) RecipieCategory *currentCategory;

@@ -1,20 +1,18 @@
 //
-//  RecipieCategory.m
+//  Tag.m
 //  iGoodFood
 //
 //  Created by Ivelin Ivanov on 9/16/13.
 //  Copyright (c) 2013 MentorMate. All rights reserved.
 //
 
-#import "RecipieCategory.h"
+#import "Tag.h"
 #import "Recipie.h"
-#import "User.h"
 
 
-@implementation RecipieCategory
+@implementation Tag
 
-@dynamic name;
-@dynamic recipies;
-@dynamic user;
+@dynamic value;
+@dynamic recipe;
 
 @end

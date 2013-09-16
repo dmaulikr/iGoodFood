@@ -8,8 +8,17 @@
 
 #import "RecipieViewController.h"
 #import "AddRecipieViewController.h"
+#import "Recipie.h"
+#import "RecipieCategory.h"
+#import "RecipieCell.h"
+#import "DetailRecipieViewController.h"
 
 @interface RecipieViewController ()
+{
+    NSMutableArray *recipies;
+    Recipie *selectedRecipie;
+}
+
 
 @end
 
@@ -24,23 +33,102 @@
     UIBarButtonItem *addRecipieButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRecipieButtonPressed)];
     
     self.navigationItem.rightBarButtonItem = addRecipieButton;
+    
+    [self loadRecipies];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self loadRecipies];
+}
+
+
 
 -(IBAction)addRecipieButtonPressed
 {
     [self performSegueWithIdentifier:@"toAddRecipieView" sender:self];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)cellLongPressed:(UIGestureRecognizer *)recognizer
 {
-    AddRecipieViewController *destination = (AddRecipieViewController *)segue.destinationViewController;
-    
-    destination.currentCategory = self.currentCategory;
-    destination.currentUser = self.currentUser;
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"What do you want?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+        [sheet showInView:recognizer.view];
+        
+        RecipieCell *cell = (RecipieCell *)recognizer.view;
+        
+        selectedRecipie = [DataModel getRecipieForName:cell.recipieLabel.text];
+    }
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[DetailRecipieViewController class]])
+    {
+        DetailRecipieViewController *destination = (DetailRecipieViewController *)segue.destinationViewController;
+        
+        destination.currentRecipie = selectedRecipie;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[AddRecipieViewController class]])
+    {
+        AddRecipieViewController *destination = (AddRecipieViewController *)segue.destinationViewController;
+        
+        destination.currentCategory = self.currentCategory;
+        destination.currentUser = self.currentUser;
+    }
 
-#warning must implement collection view
+}
 
+- (void)loadRecipies
+{
+    recipies = [NSMutableArray arrayWithArray:[DataModel getRecipiesForCategory:self.currentCategory]];
+    [self.collectionView reloadData];
+}
+
+#pragma mark - Collection View Delegate & DataSource Methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [recipies count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"recipieCell";
+    
+    RecipieCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    
+    cell.recipieLabel.text = [(Recipie *)recipies[indexPath.row] name];
+    cell.recipieImage.image = [UIImage imageWithData:[(Recipie *)recipies[indexPath.row] image]];
+    cell.recipieImage.contentMode = UIViewContentModeScaleAspectFit;
+    
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellLongPressed:)];
+    [cell addGestureRecognizer:longPressRecognizer];
+    
+    cell.recipieImage.layer.cornerRadius = 30;
+    cell.recipieImage.clipsToBounds = YES;
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedRecipie = recipies[indexPath.row];
+    [self performSegueWithIdentifier:@"toDetailRecipie" sender:self];
+}
+
+#pragma mark - Action Sheet Delegate Methods
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [DataModel deleteRecipie:selectedRecipie];
+        [self loadRecipies];
+    }
+}
 
 @end

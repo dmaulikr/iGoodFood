@@ -9,6 +9,8 @@
 #import "DataModel.h"
 #import "User.h"
 #import "RecipieCategory.h"
+#import "Recipie.h"
+#import "Tag.h"
 
 @implementation DataModel
 
@@ -62,6 +64,24 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     return NO;
 }
 
++ (void)addTagsFromArray:(NSArray *)array forRecipe:(Recipie *)recipie
+{
+    for (NSString *tagString in array)
+    {
+        Tag *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                   inManagedObjectContext:[self managedObjectContext]];
+        
+        tag.value = tagString;
+        tag.recipe = recipie;
+        
+        NSMutableArray *recipeTags = [NSMutableArray arrayWithArray:[recipie.tags allObjects]];
+        [recipeTags addObject:tag];
+        [recipie.tags setByAddingObjectsFromArray:recipeTags];
+        
+        [self saveContext];
+    }
+}
+
 + (User *)getUserForUsername:(NSString *)username andPassword:(NSString *)password
 {
     NSError *error;
@@ -74,6 +94,64 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"username == %@ && password == %@", username, password];
 
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] > 0) {
+        return fetchedObjects[0];
+    }
+    
+    return nil;
+}
+
++ (void)deleteRecipie:(Recipie *)recipie
+{
+    [[self managedObjectContext] deleteObject:recipie];
+    [self saveContext];
+}
+
++ (void)deleteCategory:(RecipieCategory *)category
+{
+    [[self managedObjectContext] deleteObject:category];
+    [self saveContext];
+}
+
++ (Recipie *)getRecipieForName:(NSString *)name
+{
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"name == %@", name];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] > 0) {
+        return fetchedObjects[0];
+    }
+    
+    return nil;
+}
+
++ (RecipieCategory *)getCategoryForName:(NSString *)name
+{
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"RecipieCategory"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"name == %@", name];
+    
     [fetchRequest setPredicate:predicate];
     
     NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
@@ -108,6 +186,56 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
         category.name = categoryName;
         category.user = user;
         
+        NSMutableArray *userCategories = [NSMutableArray arrayWithArray:[user.categories allObjects]];
+        [userCategories addObject:category];
+        [user.categories setByAddingObjectsFromArray:userCategories];
+        
+        [self saveContext];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)createRecipieWithName:(NSString *)recipieName description:(NSString *)description cookingTime:(NSInteger)cookingTime image:(UIImage *) image ingredients:(NSString *)ingredients howToCook:(NSString *)howToCook forUser:(User *)user andCategory:(RecipieCategory *)category
+{
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"name == %@", recipieName];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] == 0)
+    {
+        Recipie *recipie = [NSEntityDescription insertNewObjectForEntityForName:@"Recipie"
+                                                                  inManagedObjectContext:[self managedObjectContext]];
+        recipie.name = recipieName;
+        recipie.recipieDescription = description;
+        recipie.cookingTime = [NSNumber numberWithInteger:cookingTime];
+        recipie.image = UIImagePNGRepresentation(image);
+        recipie.ingredients = ingredients;
+        recipie.howToCook = howToCook;
+        
+        recipie.user = user;
+        recipie.category = category;
+        
+        NSMutableArray *userRecipies = [NSMutableArray arrayWithArray:[user.recipies allObjects]];
+        [userRecipies addObject:recipie];
+        [user.recipies setByAddingObjectsFromArray:userRecipies];
+        
+        NSMutableArray *categoryRecipies = [NSMutableArray arrayWithArray:[category.recipies allObjects]];
+        [categoryRecipies addObject:recipie];
+        [category.recipies setByAddingObjectsFromArray:categoryRecipies];
+        
         [self saveContext];
         
         return YES;
@@ -138,6 +266,30 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     
     return nil;
 }
+
++ (NSArray *)getRecipiesForCategory:(RecipieCategory *)category
+{
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"category == %@", category];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] > 0) {
+        return fetchedObjects;
+    }
+    
+    return nil;
+}
+
 
 #pragma mark - Core Data stack
 

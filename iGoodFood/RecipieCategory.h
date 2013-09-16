@@ -2,7 +2,7 @@
 //  RecipieCategory.h
 //  iGoodFood
 //
-//  Created by Ivelin Ivanov on 9/13/13.
+//  Created by Ivelin Ivanov on 9/16/13.
 //  Copyright (c) 2013 MentorMate. All rights reserved.
 //
 

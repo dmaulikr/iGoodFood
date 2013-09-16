@@ -10,7 +10,7 @@
 #import "User.h"
 #import "CategoryCell.h"
 
-@interface CategoryViewController : UICollectionViewController <UIAlertViewDelegate>
+@interface CategoryViewController : UICollectionViewController <UIAlertViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) User *currentUser;
 
