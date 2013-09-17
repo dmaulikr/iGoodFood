@@ -141,14 +141,14 @@
                                      forUser:self.currentUser
                                  andCategory:self.currentCategory] && ![self.nameField.text isEqualToString:@""])
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipie added!" message:@"Your recipie was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipe added!" message:@"Your recipe was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipie." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipe." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
         }
     }

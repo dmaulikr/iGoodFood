@@ -13,15 +13,18 @@
 
 + (BOOL)createUserWithName:(NSString *)fullName username:(NSString *)username andPassword:(NSString *)password;
 + (User *)getUserForUsername:(NSString *)username andPassword:(NSString *)password;
+
 + (BOOL)createCategoryWithName:(NSString *)categoryName forUser:(User *)user;
 + (NSArray *)getCategoriesForUser:(User *)user;
++ (RecipieCategory *)getCategoryForName:(NSString *)name;
++ (void)deleteCategory:(RecipieCategory *)category;
+
 + (BOOL)createRecipieWithName:(NSString *)recipieName description:(NSString *)description cookingTime:(NSInteger)cookingTime image:(UIImage *) image ingredients:(NSString *)ingredients howToCook:(NSString *)howToCook forUser:(User *)user andCategory:(RecipieCategory *)category;
 + (NSArray *)getRecipiesForCategory:(RecipieCategory *)category;
 + (Recipie *)getRecipieForName:(NSString *)name;
 + (void)deleteRecipie:(Recipie *)recipie;
-+ (RecipieCategory *)getCategoryForName:(NSString *)name;
-+ (void)deleteCategory:(RecipieCategory *)category;
-+ (void)saveContext;
 + (NSArray *)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString;
+
++ (void)saveContext;
 
 @end

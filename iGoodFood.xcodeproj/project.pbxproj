@@ -130,6 +130,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55081C7917E8BA7400EF36B5 /* CategoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5592A18E17E367D600288BB9 /* CategoryCell.h */,
+				5592A18F17E367D600288BB9 /* CategoryCell.m */,
+			);
+			name = CategoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		55081C7A17E8BA8A00EF36B5 /* RecipeCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5592A19717E36F8C00288BB9 /* RecipieCell.h */,
+				5592A19817E36F8C00288BB9 /* RecipieCell.m */,
+			);
+			name = RecipeCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		550F201617E7350700047C1A /* DetailRecipieViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,8 +162,9 @@
 			children = (
 				5592A19317E36E0900288BB9 /* RecipieViewController.h */,
 				5592A19417E36E0900288BB9 /* RecipieViewController.m */,
-				5592A19717E36F8C00288BB9 /* RecipieCell.h */,
-				5592A19817E36F8C00288BB9 /* RecipieCell.m */,
+				550F201617E7350700047C1A /* DetailRecipieViewController */,
+				5592A19D17E372BD00288BB9 /* AddRecipieViewController */,
+				55081C7A17E8BA8A00EF36B5 /* RecipeCollectionViewCell */,
 			);
 			name = RecipieViewController;
 			sourceTree = "<group>";
@@ -197,13 +216,10 @@
 				55D3374F17E32B8100B9A64E /* Main.storyboard */,
 				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
 				55D3378A17E33A2B00B9A64E /* LoginViewController */,
-				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 				55D337AB17E34ECD00B9A64E /* CategoryViewController */,
 				5592A19617E36F6B00288BB9 /* RecipieViewController */,
-				5592A19D17E372BD00288BB9 /* AddRecipieViewController */,
 				55D3378F17E34A0000B9A64E /* DataModel */,
 				55D3374417E32B8100B9A64E /* Supporting Files */,
-				550F201617E7350700047C1A /* DetailRecipieViewController */,
 			);
 			path = iGoodFood;
 			sourceTree = "<group>";
@@ -258,6 +274,7 @@
 			children = (
 				55D3377917E32C0700B9A64E /* LoginViewController.h */,
 				55D3377A17E32C0700B9A64E /* LoginViewController.m */,
+				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 			);
 			name = LoginViewController;
 			sourceTree = "<group>";
@@ -289,10 +306,9 @@
 		55D337AB17E34ECD00B9A64E /* CategoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5592A18E17E367D600288BB9 /* CategoryCell.h */,
-				5592A18F17E367D600288BB9 /* CategoryCell.m */,
 				55D3379017E34A5E00B9A64E /* CategoryViewController.h */,
 				55D3379117E34A5E00B9A64E /* CategoryViewController.m */,
+				55081C7917E8BA7400EF36B5 /* CategoryCollectionViewCell */,
 			);
 			name = CategoryViewController;
 			sourceTree = "<group>";
