@@ -22,6 +22,6 @@
 + (RecipieCategory *)getCategoryForName:(NSString *)name;
 + (void)deleteCategory:(RecipieCategory *)category;
 + (void)saveContext;
-+ (void)addTagsFromArray:(NSArray *)array forRecipe:(Recipie *)recipie;
++ (NSArray *)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString;
 
 @end

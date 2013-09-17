@@ -32,6 +32,8 @@
     
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed)];
     self.navigationItem.rightBarButtonItem = editButton;
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

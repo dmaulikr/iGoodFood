@@ -36,6 +36,8 @@
                                                                     target:self
                                                                     action:@selector(signUpButtonPressed)];
     self.navigationItem.rightBarButtonItem = signUpButton;
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,6 +54,8 @@
         }
     }
 }
+
+#pragma mark - IBAction Methods
 
 - (IBAction)signUpButtonPressed
 {
@@ -72,6 +76,8 @@
     }
 }
 
+#pragma mark - Segue Methods
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[CategoryViewController class]])
@@ -89,4 +95,5 @@
         [defaults synchronize];
     }
 }
+
 @end

@@ -34,6 +34,8 @@
     
     self.navigationItem.rightBarButtonItem = addRecipieButton;
     
+    
+    
     [self loadRecipies];
 }
 

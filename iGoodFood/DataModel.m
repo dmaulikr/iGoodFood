@@ -10,7 +10,6 @@
 #import "User.h"
 #import "RecipieCategory.h"
 #import "Recipie.h"
-#import "Tag.h"
 
 @implementation DataModel
 
@@ -62,24 +61,6 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     }
     
     return NO;
-}
-
-+ (void)addTagsFromArray:(NSArray *)array forRecipe:(Recipie *)recipie
-{
-    for (NSString *tagString in array)
-    {
-        Tag *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag"
-                                                   inManagedObjectContext:[self managedObjectContext]];
-        
-        tag.value = tagString;
-        tag.recipe = recipie;
-        
-        NSMutableArray *recipeTags = [NSMutableArray arrayWithArray:[recipie.tags allObjects]];
-        [recipeTags addObject:tag];
-        [recipie.tags setByAddingObjectsFromArray:recipeTags];
-        
-        [self saveContext];
-    }
 }
 
 + (User *)getUserForUsername:(NSString *)username andPassword:(NSString *)password
@@ -261,6 +242,30 @@ static NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     
     if ([fetchedObjects count] > 0) {
+        return fetchedObjects;
+    }
+    
+    return nil;
+}
+
++ (NSArray *)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString
+{
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
+                                              inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"user == %@ AND (name CONTAINS[c] %@ OR ingredients CONTAINS[c] %@ OR howToCook CONTAINS[c] %@)", user, searchString, searchString, searchString];
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedObjects count] > 0)
+    {
         return fetchedObjects;
     }
     

@@ -8,7 +8,6 @@
 
 #import "AddRecipieViewController.h"
 #import "DataModel.h"
-#import "TextAnalyzer.h"
 
 @interface AddRecipieViewController ()
 
@@ -123,13 +122,6 @@
         self.recipieToEdit.howToCook = self.howToField.text;
         
         [DataModel saveContext];
-        
-        [TextAnalyzer analyzeText:[NSString stringWithFormat:@"%@ %@", self.howToField.text, self.ingredientsField.text] withCompletion:^(NSMutableArray *tags) {
-            NSLog(@"%@", tags);
-            
-            [DataModel addTagsFromArray:tags forRecipe:[DataModel getRecipieForName:self.nameField.text]];
-        }];
-        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
@@ -145,12 +137,6 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipie added!" message:@"Your recipie was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
-            
-            [TextAnalyzer analyzeText:[NSString stringWithFormat:@"%@ %@", self.howToField.text, self.ingredientsField.text] withCompletion:^(NSMutableArray *tags) {
-                NSLog(@"%@", tags);
-                
-                [DataModel addTagsFromArray:tags forRecipe:[DataModel getRecipieForName:self.nameField.text]];
-            }];
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }
