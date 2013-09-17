@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UITextView *ingredientsField;
 @property (weak, nonatomic) IBOutlet UITextView *howToField;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cookingTimeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
@@ -33,7 +32,10 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed)];
     self.navigationItem.rightBarButtonItem = editButton;
     
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     
+    self.ingredientsField.layer.cornerRadius = 3;
+    self.howToField.layer.cornerRadius = 3;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,7 +45,6 @@
     self.nameField.text = self.currentRecipie.name;
     self.ingredientsField.text = self.currentRecipie.ingredients;
     self.howToField.text = self.currentRecipie.howToCook;
-    self.descriptionLabel.text = self.currentRecipie.recipieDescription;
     self.cookingTimeLabel.text = [NSString stringWithFormat:@"Cooks in %d minutes.", [self.currentRecipie.cookingTime integerValue]];
     self.imageView.image = [UIImage imageWithData:[self.currentRecipie image]];
 }
@@ -60,7 +61,7 @@
         self.ingredientsField.hidden = YES;
         self.howToField.hidden = YES;
         
-        self.descriptionLabel.hidden = NO;
+        
         self.cookingTimeLabel.hidden = NO;
         self.imageView.hidden = NO;
     }
@@ -70,7 +71,6 @@
         
         self.howToField.hidden = YES;
         
-        self.descriptionLabel.hidden = YES;
         self.cookingTimeLabel.hidden = YES;
         self.imageView.hidden = YES;
     }
@@ -79,7 +79,7 @@
         self.ingredientsField.hidden = YES;
         self.howToField.hidden = NO;
         
-        self.descriptionLabel.hidden = YES;
+        
         self.cookingTimeLabel.hidden = YES;
         self.imageView.hidden = YES;
         

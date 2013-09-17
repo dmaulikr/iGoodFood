@@ -34,6 +34,7 @@
     
     self.navigationItem.rightBarButtonItem = addRecipieButton;
     
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     
     
     [self loadRecipies];
@@ -104,6 +105,8 @@
     
     
     cell.recipieLabel.text = [(Recipie *)recipies[indexPath.row] name];
+    cell.recipieLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+
     cell.recipieImage.image = [UIImage imageWithData:[(Recipie *)recipies[indexPath.row] image]];
     cell.recipieImage.contentMode = UIViewContentModeScaleAspectFit;
     

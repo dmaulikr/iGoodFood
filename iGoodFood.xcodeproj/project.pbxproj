@@ -10,6 +10,8 @@
 		55081C6A17E87F3D00EF36B5 /* RecipieCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6917E87F3D00EF36B5 /* RecipieCategory.m */; };
 		55081C6D17E87F3E00EF36B5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6C17E87F3E00EF36B5 /* User.m */; };
 		55081C7017E87F3E00EF36B5 /* Recipie.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6F17E87F3E00EF36B5 /* Recipie.m */; };
+		55081C7717E8A44500EF36B5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55081C7517E8A44500EF36B5 /* Icon.png */; };
+		55081C7817E8A44500EF36B5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55081C7617E8A44500EF36B5 /* Icon@2x.png */; };
 		550F1FFD17E6FA0900047C1A /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 550F1FFC17E6FA0900047C1A /* add.png */; };
 		550F201517E715A000047C1A /* DetailRecipieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F201417E715A000047C1A /* DetailRecipieViewController.m */; };
 		5592A19017E367D600288BB9 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A18F17E367D600288BB9 /* CategoryCell.m */; };
@@ -57,6 +59,8 @@
 		55081C6C17E87F3E00EF36B5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		55081C6E17E87F3E00EF36B5 /* Recipie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipie.h; sourceTree = "<group>"; };
 		55081C6F17E87F3E00EF36B5 /* Recipie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipie.m; sourceTree = "<group>"; };
+		55081C7517E8A44500EF36B5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		55081C7617E8A44500EF36B5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		550F1FFC17E6FA0900047C1A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		550F201317E715A000047C1A /* DetailRecipieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRecipieViewController.h; sourceTree = "<group>"; };
 		550F201417E715A000047C1A /* DetailRecipieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRecipieViewController.m; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 		55D3374417E32B8100B9A64E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55081C7517E8A44500EF36B5 /* Icon.png */,
+				55081C7617E8A44500EF36B5 /* Icon@2x.png */,
 				550F1FFC17E6FA0900047C1A /* add.png */,
 				5592A19117E36C0600288BB9 /* recipie.png */,
 				55D337BB17E35D6D00B9A64E /* NSString+Encrypt.h */,
@@ -367,7 +373,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55081C7717E8A44500EF36B5 /* Icon.png in Resources */,
 				55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */,
+				55081C7817E8A44500EF36B5 /* Icon@2x.png in Resources */,
 				550F1FFD17E6FA0900047C1A /* add.png in Resources */,
 				5592A19217E36C0600288BB9 /* recipie.png in Resources */,
 				55D3374817E32B8100B9A64E /* InfoPlist.strings in Resources */,

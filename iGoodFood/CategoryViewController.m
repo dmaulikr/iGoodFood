@@ -48,7 +48,9 @@
     
     self.searchDisplayController.delegate = self;
     
-    
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    self.searchBar.barTintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    self.searchBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,8 +86,8 @@
 
 - (IBAction)addCategoryButtonPressed
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Category"
-                                                    message:@"Enter category name:"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Category name:"
+                                                    message:@""
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:@"Cancel", nil];
@@ -134,7 +136,6 @@
         {
             if ([DataModel createCategoryWithName:categoryName forUser:self.currentUser])
             {
-                NSLog(@"Category added");
                 [self loadCategories];
             }
             else
@@ -180,6 +181,8 @@
         cell.categoryImage.image = [UIImage imageNamed:@"recipie.png"];
         cell.categoryImage.contentMode = UIViewContentModeScaleAspectFit;
     }
+
+    cell.categoryNameLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
 
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLongPressed:)];

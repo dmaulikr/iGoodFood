@@ -37,7 +37,13 @@
                                                                     action:@selector(signUpButtonPressed)];
     self.navigationItem.rightBarButtonItem = signUpButton;
     
+    self.userNameTextField.delegate = self;
+    self.passTextField.delegate = self;    
 
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,6 +100,19 @@
         
         [defaults synchronize];
     }
+}
+
+#pragma mark - Keyboard Dismiss
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end
