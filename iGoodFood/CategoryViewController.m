@@ -165,17 +165,15 @@
     static NSString *cellIdentifier = @"categoryCell";
     
     CategoryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
     
-    cell.categoryNameLabel.text = [(RecipieCategory *)categories[indexPath.row] name];
+    cell.categoryNameLabel.text = category.name;
     
-    if ([[(RecipieCategory *)categories[indexPath.row] recipies] count] > 0)
+    if (category.recipies.count > 0)
     {
-        RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
         Recipie *recipie = (Recipie *)[[category.recipies allObjects] objectAtIndex:0];
         
-        NSData *imageData = recipie.image;
-        
-        cell.categoryImage.image = [UIImage imageWithData:imageData];
+        cell.categoryImage.image = [UIImage imageWithData:recipie.image];
     }
     else
     {
@@ -184,9 +182,9 @@
     }
 
     cell.categoryNameLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
-
     
-    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLongPressed:)];
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(categoryLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
     cell.categoryImage.layer.cornerRadius = 15;
@@ -266,7 +264,7 @@
     cell.textLabel.text = cellRecipie.name;
     cell.imageView.image = [UIImage imageWithData:cellRecipie.image];
     cell.detailTextLabel.text = [(RecipieCategory *)cellRecipie.category name];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     
     return cell;
 }

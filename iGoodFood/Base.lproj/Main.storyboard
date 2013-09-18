@@ -8,6 +8,7 @@
         <scene sceneID="cUi-kZ-frf">
             <objects>
                 <navigationController id="rS3-R9-Ivy" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -278,7 +279,7 @@
             </objects>
             <point key="canvasLocation" x="889" y="64"/>
         </scene>
-        <!--Detail Recipie View Controller - Recipie-->
+        <!--Detail Recipie View Controller - Recipe-->
         <scene sceneID="Whg-vP-UWR">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="m56-Ro-12h" customClass="DetailRecipieViewController" sceneMemberID="viewController">
@@ -373,7 +374,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Recipie" id="y1f-7j-iUN"/>
+                    <navigationItem key="navigationItem" title="Recipe" id="y1f-7j-iUN"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="cookingTimeLabel" destination="4SU-0W-PLj" id="nzt-0R-8fy"/>
@@ -387,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I90-2b-F8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831" y="322"/>
+            <point key="canvasLocation" x="1815" y="804"/>
         </scene>
         <!--Add Recipie View Controller - New Recipie-->
         <scene sceneID="WJa-Si-Pw2">
@@ -402,7 +403,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5I0-3e-U5d">
-                                <rect key="frame" x="20" y="20" width="280" height="29"/>
+                                <rect key="frame" x="20" y="53" width="280" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qx9-SQ-sh9"/>
@@ -417,7 +418,7 @@
                                 </connections>
                             </segmentedControl>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVG-aC-uAd">
-                                <rect key="frame" x="20" y="56" width="280" height="454"/>
+                                <rect key="frame" x="20" y="89" width="280" height="421"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.70196078429999997" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,7 +426,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZ3-6v-6q3">
-                                <rect key="frame" x="20" y="57" width="280" height="453"/>
+                                <rect key="frame" x="20" y="89" width="280" height="421"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.70196078429999997" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -433,7 +434,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipie name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j6a-Bu-wey">
-                                <rect key="frame" x="20" y="56" width="280" height="30"/>
+                                <rect key="frame" x="20" y="89" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BjA-Ar-UOt"/>
@@ -442,7 +443,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Minutes" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ENe-HZ-OgW">
-                                <rect key="frame" x="203" y="94" width="97" height="30"/>
+                                <rect key="frame" x="203" y="127" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4la-F7-bm4"/>
@@ -452,7 +453,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready in:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1W-bo-TJb">
-                                <rect key="frame" x="20" y="98" width="175" height="21"/>
+                                <rect key="frame" x="20" y="131" width="175" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fU4-Jc-Z00"/>
@@ -490,7 +491,7 @@
                                 </connections>
                             </button>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTE-05-cno">
-                                <rect key="frame" x="20" y="132" width="280" height="378"/>
+                                <rect key="frame" x="20" y="165" width="280" height="345"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="9Gh-jX-ybd"/>
@@ -503,7 +504,7 @@
                             <constraint firstItem="ew5-gF-y1S" firstAttribute="top" secondItem="LVG-aC-uAd" secondAttribute="bottom" constant="8" id="4mo-Jw-mtE"/>
                             <constraint firstItem="SMf-xY-l8L" firstAttribute="top" secondItem="RHI-F2-cXX" secondAttribute="bottom" constant="20" id="4oB-4p-mfO"/>
                             <constraint firstItem="bTE-05-cno" firstAttribute="top" secondItem="ENe-HZ-OgW" secondAttribute="bottom" constant="8" id="5Ms-tT-RmU"/>
-                            <constraint firstItem="IZ3-6v-6q3" firstAttribute="top" secondItem="5I0-3e-U5d" secondAttribute="bottom" constant="9" id="AeV-o6-aBO"/>
+                            <constraint firstItem="IZ3-6v-6q3" firstAttribute="top" secondItem="5I0-3e-U5d" secondAttribute="bottom" constant="8" id="AeV-o6-aBO"/>
                             <constraint firstItem="v1W-bo-TJb" firstAttribute="top" secondItem="j6a-Bu-wey" secondAttribute="bottom" constant="12" id="CN1-zg-rUS"/>
                             <constraint firstItem="LVG-aC-uAd" firstAttribute="top" secondItem="5I0-3e-U5d" secondAttribute="bottom" constant="8" id="EJz-Te-OEx"/>
                             <constraint firstAttribute="trailing" secondItem="j6a-Bu-wey" secondAttribute="trailing" constant="20" id="EKV-dz-xCb"/>
@@ -512,7 +513,7 @@
                             <constraint firstItem="IZ3-6v-6q3" firstAttribute="leading" secondItem="m6C-Zx-ypE" secondAttribute="leading" constant="20" id="LhP-3j-2yS"/>
                             <constraint firstItem="ew5-gF-y1S" firstAttribute="top" secondItem="bTE-05-cno" secondAttribute="bottom" constant="8" id="Oj0-CB-KTk"/>
                             <constraint firstItem="LVG-aC-uAd" firstAttribute="leading" secondItem="m6C-Zx-ypE" secondAttribute="leading" constant="20" id="QaC-ql-8UA"/>
-                            <constraint firstItem="5I0-3e-U5d" firstAttribute="top" secondItem="rM2-fj-mtL" secondAttribute="bottom" id="TuB-9o-uuB"/>
+                            <constraint firstItem="5I0-3e-U5d" firstAttribute="top" secondItem="rM2-fj-mtL" secondAttribute="bottom" constant="33" id="TuB-9o-uuB"/>
                             <constraint firstItem="5I0-3e-U5d" firstAttribute="leading" secondItem="m6C-Zx-ypE" secondAttribute="leading" constant="20" id="Vod-q1-aZp"/>
                             <constraint firstAttribute="trailing" secondItem="IZ3-6v-6q3" secondAttribute="trailing" constant="20" id="Y2M-zI-R6q"/>
                             <constraint firstAttribute="trailing" secondItem="ew5-gF-y1S" secondAttribute="trailing" constant="20" id="bdI-qd-b6R"/>
@@ -542,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06V-4R-w9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831" y="-349"/>
+            <point key="canvasLocation" x="2377" y="-155"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="AK4-x3-dLJ">
@@ -624,7 +625,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="zb2-Om-PVK"/>
+        <segue reference="m7Z-W2-rBO"/>
         <segue reference="Vvf-kO-bgV"/>
     </inferredMetricsTieBreakers>
 </document>
