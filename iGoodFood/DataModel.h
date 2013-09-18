@@ -11,20 +11,22 @@
 
 @interface DataModel : NSObject
 
-+ (BOOL)createUserWithName:(NSString *)fullName username:(NSString *)username andPassword:(NSString *)password;
-+ (User *)getUserForUsername:(NSString *)username andPassword:(NSString *)password;
++ (DataModel *)sharedModel;
 
-+ (BOOL)createCategoryWithName:(NSString *)categoryName forUser:(User *)user;
-+ (NSArray *)getCategoriesForUser:(User *)user;
-+ (RecipieCategory *)getCategoryForName:(NSString *)name;
-+ (void)deleteCategory:(RecipieCategory *)category;
+- (void)createUserWithName:(NSString *)fullName username:(NSString *)username andPassword:(NSString *)password completion:(void (^)(BOOL userCreated))completion;
+- (void)getUserForUsername:(NSString *)username andPassword:(NSString *)password completion:(void (^)(User *newUser))completion;
 
-+ (BOOL)createRecipieWithName:(NSString *)recipieName description:(NSString *)description cookingTime:(NSInteger)cookingTime image:(UIImage *) image ingredients:(NSString *)ingredients howToCook:(NSString *)howToCook forUser:(User *)user andCategory:(RecipieCategory *)category;
-+ (NSArray *)getRecipiesForCategory:(RecipieCategory *)category;
-+ (Recipie *)getRecipieForName:(NSString *)name;
-+ (void)deleteRecipie:(Recipie *)recipie;
-+ (NSArray *)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString;
+- (void)createCategoryWithName:(NSString *)categoryName forUser:(User *)user completion:(void (^)(BOOL isCategoryCreated))completion;
+- (void)getCategoriesForUser:(User *)user completion:(void (^)(NSArray *allCategories))completion;
+- (void)getCategoryForName:(NSString *)name completion:(void (^)(RecipieCategory *newCategory))completion;
+- (void)deleteCategory:(RecipieCategory *)category completion:(void (^)())completion;
 
-+ (void)saveContext;
+- (void)createRecipieWithInfoDictionary:(NSDictionary *)infoDictionary forUser:(User *)user andCategory:(RecipieCategory *)category completion:(void (^)(BOOL isRecipeCreated))completion;
+- (void)getRecipiesForCategory:(RecipieCategory *)category completion:(void (^)(NSArray *recipes))completion;
+- (void)getRecipieForName:(NSString *)name completion:(void (^)(Recipie *requestedRecipe))completion;
+- (void)deleteRecipie:(Recipie *)recipie completion:(void (^)())completion;
+- (void)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString completion:(void (^)(NSArray *recipes))completion;
+
+- (void)saveContext;
 
 @end

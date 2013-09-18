@@ -127,32 +127,31 @@
         self.recipieToEdit.ingredients = self.ingredientsField.text;
         self.recipieToEdit.howToCook = self.howToField.text;
         
-        [DataModel saveContext];
+        [[DataModel sharedModel] saveContext];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
-        if ([DataModel createRecipieWithName:self.nameField.text
-                                 description:@""
-                                 cookingTime:[self.timeField.text integerValue]
-                                       image:(changedImage ? self.imageView.image : [UIImage imageNamed:@"recipie.png"])
-                                 ingredients:self.ingredientsField.text
-                                   howToCook:self.howToField.text
-                                     forUser:self.currentUser
-                                 andCategory:self.currentCategory] && ![self.nameField.text isEqualToString:@""])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipe added!" message:@"Your recipe was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipe." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
+        NSDictionary *infoDict = @{@"name" : self.nameField.text,
+                                   @"cookingTime" : [NSNumber numberWithInteger:[self.timeField.text integerValue]],
+                                   @"image" : (changedImage ? self.imageView.image : [UIImage imageNamed:@"recipie.png"]),
+                                   @"ingredients" : self.ingredientsField.text,
+                                   @"howToCook" : self.howToField.text};
+        [[DataModel sharedModel] createRecipieWithInfoDictionary:infoDict forUser:self.currentUser andCategory:self.currentCategory completion:^(BOOL isRecipeCreated) {
+            if (isRecipeCreated)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipe added!" message:@"Your recipe was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipe." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }];
     }
-    
 }
 
 #pragma mark - Keyboard Dismiss

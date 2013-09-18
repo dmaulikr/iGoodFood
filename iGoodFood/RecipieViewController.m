@@ -62,7 +62,9 @@
         
         RecipieCell *cell = (RecipieCell *)recognizer.view;
         
-        selectedRecipie = [DataModel getRecipieForName:cell.recipieLabel.text];
+        [[DataModel sharedModel] getRecipieForName:cell.recipieLabel.text completion:^(Recipie *requestedRecipe) {
+            selectedRecipie = requestedRecipe;
+        }];
     }
 }
 
@@ -86,8 +88,10 @@
 
 - (void)loadRecipies
 {
-    recipies = [NSMutableArray arrayWithArray:[DataModel getRecipiesForCategory:self.currentCategory]];
-    [self.collectionView reloadData];
+    [[DataModel sharedModel] getRecipiesForCategory:self.currentCategory completion:^(NSArray *recipes) {
+        recipies = [NSMutableArray arrayWithArray:recipes];
+        [self.collectionView reloadData];
+    }];
 }
 
 #pragma mark - Collection View Delegate & DataSource Methods
@@ -113,7 +117,7 @@
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.recipieImage.layer.cornerRadius = 30;
+    cell.recipieImage.layer.cornerRadius = 5;
     cell.recipieImage.clipsToBounds = YES;
     
     return cell;
@@ -131,8 +135,9 @@
 {
     if (buttonIndex == 0)
     {
-        [DataModel deleteRecipie:selectedRecipie];
-        [self loadRecipies];
+        [[DataModel sharedModel] deleteRecipie:selectedRecipie completion:^{
+            [self loadRecipies];
+        }];
     }
 }
 

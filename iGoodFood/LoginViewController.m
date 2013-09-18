@@ -54,10 +54,12 @@
     
     if ([[defaults objectForKey:@"rememberMe"] boolValue])
     {
-        if ((user = [DataModel getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"]]) != nil)
-        {
-            [self performSegueWithIdentifier:@"toCategoryView" sender:self];
-        }
+        [[DataModel sharedModel] getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"] completion:^(User *newUser) {
+            if ((user = newUser))
+            {
+                [self performSegueWithIdentifier:@"toCategoryView" sender:self];
+            }
+        }];
     }
 }
 
@@ -71,15 +73,17 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    if ((user = [DataModel getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt]]) != nil)
-    {
-        [self performSegueWithIdentifier:@"toCategoryView" sender:self];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Invalid username or password!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-    }
+    [[DataModel sharedModel] getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt] completion:^(User *newUser) {
+        if ((user = newUser))
+        {
+            [self performSegueWithIdentifier:@"toCategoryView" sender:self];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Invalid username or password!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
 
 #pragma mark - Segue Methods

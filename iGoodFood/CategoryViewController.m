@@ -65,9 +65,11 @@
 
 - (void)loadCategories
 {
-    categories = [NSMutableArray arrayWithArray:[DataModel getCategoriesForUser:self.currentUser]];
-    
-    [self.collectionView reloadData];
+    [[DataModel sharedModel] getCategoriesForUser:self.currentUser completion:^(NSArray *allCategories) {
+        categories = [NSMutableArray arrayWithArray:allCategories];
+        
+        [self.collectionView reloadData];
+    }];
 }
 
 #pragma mark - IBAction Methods
@@ -112,7 +114,9 @@
         
         CategoryCell *cell = (CategoryCell *)recognizer.view;
         
-        selectedCategory = [DataModel getCategoryForName:cell.categoryNameLabel.text];
+        [[DataModel sharedModel] getCategoryForName:cell.categoryNameLabel.text completion:^(RecipieCategory *newCategory) {
+            selectedCategory = newCategory;
+        }];
     }
 }
 
@@ -135,20 +139,22 @@
         }
         else
         {
-            if ([DataModel createCategoryWithName:categoryName forUser:self.currentUser])
-            {
-                [self loadCategories];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                                message:@"Category with this name already exists!"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles: nil];
-                
-                [alert show];
-            }
+            [[DataModel sharedModel] createCategoryWithName:categoryName forUser:self.currentUser completion:^(BOOL isCategoryCreated) {
+                if (isCategoryCreated)
+                {
+                    [self loadCategories];
+                }
+                else
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                                    message:@"Category with this name already exists!"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles: nil];
+                    
+                    [alert show];
+                }
+            }];
         }
     }
 }
@@ -187,7 +193,7 @@
                                                                                                       action:@selector(categoryLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.categoryImage.layer.cornerRadius = 15;
+    cell.categoryImage.layer.cornerRadius = 3;
     cell.categoryImage.clipsToBounds = YES;
     
     return cell;
@@ -224,8 +230,9 @@
 {
     if (buttonIndex == 0)
     {
-        [DataModel deleteCategory:selectedCategory];
-        [self loadCategories];
+        [[DataModel sharedModel] deleteCategory:selectedCategory completion:^{
+            [self loadCategories];
+        }];
     }
 }
 
@@ -264,7 +271,7 @@
     cell.textLabel.text = cellRecipie.name;
     cell.imageView.image = [UIImage imageWithData:cellRecipie.image];
     cell.detailTextLabel.text = [(RecipieCategory *)cellRecipie.category name];
-    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -279,9 +286,12 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    allRecipes = [NSMutableArray arrayWithArray:[DataModel getRecipesForUser:self.currentUser withSearchString:searchString]];
+    [[DataModel sharedModel] getRecipesForUser:self.currentUser withSearchString:searchString completion:^(NSArray *recipes) {
+        allRecipes = [NSMutableArray arrayWithArray:recipes];
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }];
 
-    return YES;
+    return NO;
 }
 
 @end
