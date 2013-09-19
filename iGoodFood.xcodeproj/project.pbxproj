@@ -197,7 +197,6 @@
 			children = (
 				55D3378817E33A0F00B9A64E /* App Delegate */,
 				55D3374F17E32B8100B9A64E /* Main.storyboard */,
-				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
 				55D3378A17E33A2B00B9A64E /* LoginViewController */,
 				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 				55D337AB17E34ECD00B9A64E /* CategoryViewController */,
@@ -276,6 +275,7 @@
 		55D3378F17E34A0000B9A64E /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
 				55D337A817E34E5900B9A64E /* DataModel.h */,
 				55D337A917E34E5900B9A64E /* DataModel.m */,
 				550F200A17E706E300047C1A /* User.h */,

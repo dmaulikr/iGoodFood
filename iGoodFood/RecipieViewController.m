@@ -16,6 +16,9 @@
 @interface RecipieViewController ()
 {
     NSMutableArray *recipies;
+    
+#warning Why this one isn't a property? Should it be strong/weak;
+#warning What is the default ownership for ivars?
     Recipie *selectedRecipie;
 }
 
@@ -34,6 +37,8 @@
     
     self.navigationItem.rightBarButtonItem = addRecipieButton;
     
+    
+#warning What is the purpose to invoke this method here and in viewDidAppear?
     [self loadRecipies];
 }
 
@@ -68,13 +73,11 @@
     if ([segue.destinationViewController isKindOfClass:[DetailRecipieViewController class]])
     {
         DetailRecipieViewController *destination = (DetailRecipieViewController *)segue.destinationViewController;
-        
         destination.currentRecipie = selectedRecipie;
     }
     else if ([segue.destinationViewController isKindOfClass:[AddRecipieViewController class]])
     {
         AddRecipieViewController *destination = (AddRecipieViewController *)segue.destinationViewController;
-        
         destination.currentCategory = self.currentCategory;
         destination.currentUser = self.currentUser;
     }
