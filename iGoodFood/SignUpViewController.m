@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *repeatPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fullNameTextField;
 
-#warning Nice One! Bravi
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @end
@@ -55,15 +54,12 @@
 - (IBAction)signUpButtonPressed
 {
     
-#warning At all this logic is valid only for the passwords. Pesho.length < 6, but is valid name. 
-#warning You still permit to sign up with something like this @"       "
-    
     for (UITextField *textField in self.textFields)
     {
-        if ([textField.text isEqualToString:@""] || [textField.text length] < 6)
+        if ([textField.text isEqualToString:@""] || [[textField.text stringByReplacingOccurrencesOfString:@" " withString:@""] length] == 0)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                            message:@"Some field is short or empty!"
+                                                            message:@"Some field is blank or empty!"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
@@ -73,12 +69,12 @@
         }
     }
     
-    if ([self.passwordTextField.text isEqualToString:self.repeatPasswordTextField.text])
+    if ([self.passwordTextField.text isEqualToString:self.repeatPasswordTextField.text] && [self.passwordTextField.text length] >= 6)
     {
         [[DataModel sharedModel] createUserWithName:self.fullNameTextField.text
                                            username:self.usernameTextField.text
-                                        andPassword:[self.passwordTextField.text encrypt]
-                                         completion:^(BOOL userCreated) {
+                                           password:[self.passwordTextField.text encrypt]
+                                         completion:^(BOOL userCreated, NSError *error) {
                                              if (userCreated)
                                              {
                                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
@@ -106,7 +102,7 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!"
-                                                        message:@"Passwords don't match!"
+                                                        message:@"Passwords don't match or they are too short!"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles: nil];

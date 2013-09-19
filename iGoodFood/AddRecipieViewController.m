@@ -72,47 +72,55 @@
 {
     if (self.segmentIndicator.selectedSegmentIndex == 0)
     {
-        self.ingredientsField.hidden = YES;
-        self.howToField.hidden = YES;
+        [self hideHowToCookControls:NO];
+        [self hideIngredientsControls:NO];
         
         [self.ingredientsField resignFirstResponder];
         [self.howToField resignFirstResponder];
         
+        [self hideBasicInfoControls:YES];
         
-#warning Extract these in separate method:
-#warning Ex. hideBasicInfoTextFields:(BOOL)hidden;
-        self.nameField.hidden = NO;
-        self.timeField.hidden = NO;
-        self.timeLabel.hidden = NO;
-        self.imageView.hidden = NO;
     }
     else if (self.segmentIndicator.selectedSegmentIndex == 1)
     {
-        self.ingredientsField.hidden = NO;
+        [self hideIngredientsControls:YES];
         
-        self.howToField.hidden = YES;
+        [self hideHowToCookControls:YES];
         
-        self.nameField.hidden = YES;
-        self.timeField.hidden = YES;
-        self.timeLabel.hidden = YES;
-        self.imageView.hidden = YES;
+        [self hideBasicInfoControls:NO];
         
         [self.ingredientsField becomeFirstResponder];
     }
     else
     {
-        self.ingredientsField.hidden = YES;
-        self.howToField.hidden = NO;
+        [self hideIngredientsControls:NO];
+
+        [self hideHowToCookControls:YES];
         
-        self.nameField.hidden = YES;
-        self.timeField.hidden = YES;
-        self.timeLabel.hidden = YES;
-        self.imageView.hidden = YES;
+        [self hideBasicInfoControls:NO];
         
         [self.howToField becomeFirstResponder];
 
     }
         
+}
+
+- (void)hideBasicInfoControls:(BOOL)hidden
+{
+    self.nameField.hidden = !hidden;
+    self.timeField.hidden = !hidden;
+    self.timeLabel.hidden = !hidden;
+    self.imageView.hidden = !hidden;
+}
+
+- (void)hideIngredientsControls:(BOOL)hidden
+{
+    self.ingredientsField.hidden = !hidden;
+}
+
+- (void)hideHowToCookControls:(BOOL)hidden
+{
+    self.howToField.hidden = !hidden;
 }
 
 - (IBAction)cancelButtonPressed:(id)sender
@@ -124,28 +132,25 @@
 {
     if (self.recipieToEdit != nil && ![self.nameField.text isEqualToString:@""])
     {
+        NSDictionary *infoDict = @{@"name" : self.nameField.text,
+                                   @"cookingTime" : @([self.timeField.text integerValue]),
+                                   @"image" : self.imageView.image,
+                                   @"ingredients" : self.ingredientsField.text,
+                                   @"howToCook" : self.howToField.text};
         
+        [[DataModel sharedModel] updateRecipe:self.recipieToEdit withDataDictionary:infoDict];
         
-#warning You should have method in the DataManager -> updateRecipe:(Recipe*)oldRecipe newRecipe:(Recipe*)newRecipe completion...
-#warning Don't update it by yourself, this is work of the DataManeger
-        self.recipieToEdit.name = self.nameField.text;
-#warning Literalls, literals everywhere :D
-        self.recipieToEdit.cookingTime = [NSNumber numberWithInteger:[self.timeField.text integerValue]];
-        self.recipieToEdit.image = UIImagePNGRepresentation(self.imageView.image);
-        self.recipieToEdit.ingredients = self.ingredientsField.text;
-        self.recipieToEdit.howToCook = self.howToField.text;
-        
-        [[DataModel sharedModel] saveContext];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
         NSDictionary *infoDict = @{@"name" : self.nameField.text,
-                                   @"cookingTime" : [NSNumber numberWithInteger:[self.timeField.text integerValue]],
+                                   @"cookingTime" : @([self.timeField.text integerValue]),
                                    @"image" : (changedImage ? self.imageView.image : [UIImage imageNamed:@"recipie.png"]),
                                    @"ingredients" : self.ingredientsField.text,
                                    @"howToCook" : self.howToField.text};
-        [[DataModel sharedModel] createRecipieWithInfoDictionary:infoDict forUser:self.currentUser andCategory:self.currentCategory completion:^(BOOL isRecipeCreated) {
+        
+        [[DataModel sharedModel] createRecipieWithInfoDictionary:infoDict forUser:self.currentUser andCategory:self.currentCategory completion:^(BOOL isRecipeCreated, NSError *error) {
             if (isRecipeCreated)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipe added!" message:@"Your recipe was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

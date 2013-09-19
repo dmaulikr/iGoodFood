@@ -21,9 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passTextField;
 @property (weak, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
 
-#warning This declaration in not needed
-- (IBAction)loginButtonPressed:(id)sender;
-
 @end
 
 @implementation LoginViewController
@@ -55,7 +52,7 @@
     
     if ([[defaults objectForKey:@"rememberMe"] boolValue])
     {
-        [[DataModel sharedModel] getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"] completion:^(User *newUser) {
+        [[DataModel sharedModel] getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"] completion:^(User *newUser, NSError *error) {
             if ((user = newUser))
             {
                 [self performSegueWithIdentifier:@"toCategoryView" sender:self];
@@ -74,7 +71,7 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    [[DataModel sharedModel] getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt] completion:^(User *newUser) {
+    [[DataModel sharedModel] getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt] completion:^(User *newUser, NSError *error) {
         if ((user = newUser))
         {
             [self performSegueWithIdentifier:@"toCategoryView" sender:self];
@@ -102,8 +99,7 @@
         [defaults setObject:user.username forKey:@"username"];
         [defaults setObject:user.password forKey:@"password"];
         
-#warning Use Literals - [NSNumber numberWithBool:self.rememberMeSwitch.isOn] => @(self.rememberMeSwitch.isOn)
-        [defaults setObject:[NSNumber numberWithBool:self.rememberMeSwitch.isOn] forKey:@"rememberMe"];
+        [defaults setObject:@(self.rememberMeSwitch.isOn) forKey:@"rememberMe"];
         
         [defaults synchronize];
     }

@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
+- (IBAction)logOutButtonPressed;
+- (IBAction)addCategoryButtonPressed;
+
 @end
 
 @implementation CategoryViewController
@@ -32,21 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-#warning Why didn't add these buttons in IB
-    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(logOutButtonPressed)];
-    self.navigationItem.leftBarButtonItem = logOutButton;
-    
-    UIBarButtonItem *addCategoryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                       target:self
-                                                                                       action:@selector(addCategoryButtonPressed)];
-    self.navigationItem.rightBarButtonItem = addCategoryButton;
-    
-    self.title = @"Categories";
     
     self.searchDisplayController.delegate = self;
     
@@ -66,10 +54,11 @@
 
 - (void)loadCategories
 {
-    [[DataModel sharedModel] getCategoriesForUser:self.currentUser completion:^(NSArray *allCategories) {
-        categories = [NSMutableArray arrayWithArray:allCategories];
-        
-        [self.collectionView reloadData];
+    [[DataModel sharedModel] getCategoriesForUser:self.currentUser completion:^(NSArray *allCategories, NSError *error) {
+        if (allCategories) {
+            categories = [NSMutableArray arrayWithArray:allCategories];
+            [self.collectionView reloadData];
+        }
     }];
 }
 
@@ -115,7 +104,7 @@
         
         CategoryCell *cell = (CategoryCell *)recognizer.view;
         
-        [[DataModel sharedModel] getCategoryForName:cell.categoryNameLabel.text completion:^(RecipieCategory *newCategory) {
+        [[DataModel sharedModel] getCategoryForName:cell.categoryNameLabel.text completion:^(RecipieCategory *newCategory, NSError *error) {
             selectedCategory = newCategory;
         }];
     }
@@ -140,7 +129,7 @@
         }
         else
         {
-            [[DataModel sharedModel] createCategoryWithName:categoryName forUser:self.currentUser completion:^(BOOL isCategoryCreated) {
+            [[DataModel sharedModel] createCategoryWithName:categoryName forUser:self.currentUser completion:^(BOOL isCategoryCreated, NSError *error) {
                 if (isCategoryCreated)
                 {
                     [self loadCategories];
@@ -162,6 +151,7 @@
 
 #pragma mark - Collection View Delegate & DataSource Methods
 
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [categories count];
@@ -174,31 +164,11 @@
     CategoryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
     
-    cell.categoryNameLabel.text = category.name;
-    
-    
-#warning To be more encapsulated it's better to make a custom method of CategoryCell with which to configure the cell
-//Example: configureWithRecipe:(Recipe*)aRecipe
-    if (category.recipies.count > 0)
-    {
-        Recipie *recipie = (Recipie *)[[category.recipies allObjects] objectAtIndex:0];
-        
-        cell.categoryImage.image = [UIImage imageWithData:recipie.image];
-    }
-    else
-    {
-        cell.categoryImage.image = [UIImage imageNamed:@"recipie.png"];
-        cell.categoryImage.contentMode = UIViewContentModeScaleAspectFit;
-    }
-
-    cell.categoryNameLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
-    
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                       action:@selector(categoryLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.categoryImage.layer.cornerRadius = 3;
-    cell.categoryImage.clipsToBounds = YES;
+    [cell configureCellWithCategory:category];
     
     return cell;
 }
@@ -264,8 +234,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-#warning if (!cell)
-    if (cell == nil)
+
+    if (!cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
@@ -290,9 +260,12 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    [[DataModel sharedModel] getRecipesForUser:self.currentUser withSearchString:searchString completion:^(NSArray *recipes) {
-        allRecipes = [NSMutableArray arrayWithArray:recipes];
-        [self.searchDisplayController.searchResultsTableView reloadData];
+    [[DataModel sharedModel] getRecipesForUser:self.currentUser withSearchString:searchString completion:^(NSArray *recipes, NSError *error) {
+        if (recipes)
+        {
+            allRecipes = [NSMutableArray arrayWithArray:recipes];
+            [self.searchDisplayController.searchResultsTableView reloadData];
+        }
     }];
 
     return NO;

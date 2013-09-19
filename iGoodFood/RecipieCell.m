@@ -19,13 +19,16 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)configureCellwithRecipe:(Recipie *)recipe
 {
-    // Drawing code
+    self.recipieLabel.text = recipe.name;
+    self.recipieLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    
+    self.recipieImage.image = [UIImage imageWithData:recipe.image];
+    self.recipieImage.contentMode = UIViewContentModeScaleAspectFit;
+ 
+    self.recipieImage.layer.cornerRadius = 5;
+    self.recipieImage.clipsToBounds = YES;
 }
-*/
 
 @end

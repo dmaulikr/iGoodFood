@@ -156,7 +156,13 @@
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="i0Q-l8-rci"/>
+                    <navigationItem key="navigationItem" id="i0Q-l8-rci">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="l62-q2-9w6">
+                            <connections>
+                                <action selector="addRecipieButtonPressed" destination="xAH-fa-Ahc" id="C4J-tJ-4Iv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="kpX-rJ-RBq" kind="modal" identifier="toAddRecipieView" id="VWZ-2W-Shh"/>
                         <segue destination="m56-Ro-12h" kind="push" identifier="toDetailRecipie" id="m7Z-W2-rBO"/>
@@ -166,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="1294" y="64"/>
         </scene>
-        <!--Category View Controller-->
+        <!--Category View Controller - Categories-->
         <scene sceneID="STT-4X-fci">
             <objects>
                 <viewController id="8P5-Ce-8xY" customClass="CategoryViewController" sceneMemberID="viewController">
@@ -242,7 +248,18 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="T8l-t4-PJb"/>
+                    <navigationItem key="navigationItem" title="Categories" id="T8l-t4-PJb">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="LmY-fJ-iir">
+                            <connections>
+                                <action selector="logOutButtonPressed" destination="8P5-Ce-8xY" id="uyy-Hu-gJu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kaZ-fr-eYf">
+                            <connections>
+                                <action selector="addCategoryButtonPressed" destination="8P5-Ce-8xY" id="NEp-vk-Qig"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="U1L-Rj-hxK" id="ANU-8m-Q95"/>
@@ -360,7 +377,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Recipe" id="y1f-7j-iUN"/>
+                    <navigationItem key="navigationItem" title="Recipe" id="y1f-7j-iUN">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="g7n-BO-mSv">
+                            <connections>
+                                <action selector="editButtonPressed" destination="m56-Ro-12h" id="q1s-Wv-Fgt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="cookingTimeLabel" destination="4SU-0W-PLj" id="nzt-0R-8fy"/>

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecipieCategory.h"
 
 @interface CategoryCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImage;
 @property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
+
+- (void)configureCellWithCategory:(RecipieCategory *)category;
 
 @end

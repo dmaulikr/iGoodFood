@@ -42,22 +42,16 @@ static dispatch_queue_t q;
     }
 }
 
-
-#warning In the methods that must return some meaningfull result it's better to put at the beggining 
-#warning something like guard. In this case you'll not doing unnecessary computations
-//if (!completion)
-//{
-//    return;
-//}
-
-
 #pragma mark - User Managing Methods
 
-- (void)createUserWithName:(NSString *)fullName username:(NSString *)username andPassword:(NSString *)password completion:(void (^)(BOOL userCreated))completion
+- (void)createUserWithName:(NSString *)fullName username:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL userCreated, NSError *error))completion;
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
@@ -69,6 +63,8 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] == 0)
@@ -81,31 +77,27 @@ static dispatch_queue_t q;
             
             [self saveContext];
             
-            if (completion) {
-                dispatch_async(currentQueue, ^{
-                    completion(YES);
+            dispatch_async(currentQueue, ^{
+                    completion(YES, error);
                 });
-            }
         }
         else
         {
-            if(completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(NO);
+            dispatch_async(currentQueue, ^{
+                    completion(NO, error);
                 });
-            }
         }
     });
 }
 
-- (void)getUserForUsername:(NSString *)username andPassword:(NSString *)password completion:(void (^)(User *newUser))completion
+- (void)getUserForUsername:(NSString *)username andPassword:(NSString *)password completion:(void (^)(User *newUser, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        
-#warning Declare variable as close as it's possible to their first usage
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
@@ -117,25 +109,20 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-#warning Pass the error Obj to the completion
-        
+
         if ([fetchedObjects count] > 0) {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects[0]);
+            dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects[0], error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
+            dispatch_async(currentQueue, ^{
+                    completion(nil, error);
                 });
-            }
         }
     });
 }
@@ -144,23 +131,28 @@ static dispatch_queue_t q;
 
 - (void)deleteCategory:(RecipieCategory *)category completion:(void (^)())completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_async(q, ^{
         [[self managedObjectContext] deleteObject:category];
         [self saveContext];
         
-        if (completion) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
                 completion();
             });
-        }
     });
 }
 
-- (void)getCategoryForName:(NSString *)name completion:(void (^)(RecipieCategory *newCategory))completion
+- (void)getCategoryForName:(NSString *)name completion:(void (^)(RecipieCategory *newCategory, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"RecipieCategory"
@@ -172,35 +164,34 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] > 0)
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects[0]);
+            dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects[0], error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
+            dispatch_async(currentQueue, ^{
+                    completion(nil, error);
                 });
-            }
         }
 
     });
 }
 
-- (void)createCategoryWithName:(NSString *)categoryName forUser:(User *)user completion:(void (^)(BOOL isCategoryCreated))completion
+- (void)createCategoryWithName:(NSString *)categoryName forUser:(User *)user completion:(void (^)(BOOL isCategoryCreated, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"RecipieCategory"
@@ -212,6 +203,8 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] == 0)
@@ -221,40 +214,31 @@ static dispatch_queue_t q;
             category.name = categoryName;
             category.user = user;
             
-            
-#warning mMMM I'm not sure what was your idea but... at least you've - (void)addCategoriesObject:(RecipieCategory *)value; in User obj
-
-            NSMutableArray *userCategories = [NSMutableArray arrayWithArray:[user.categories allObjects]];
-            [userCategories addObject:category];
-            [user.categories setByAddingObjectsFromArray:userCategories];
+            [user addCategoriesObject:category];
             
             [self saveContext];
             
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(YES);
+            dispatch_async(currentQueue, ^{
+                    completion(YES, error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(NO);
+            dispatch_async(currentQueue, ^{
+                    completion(NO, error);
                 });
-            }
         }
     });
 }
 
-- (void)getCategoriesForUser:(User *)user completion:(void (^)(NSArray *allCategories))completion
+- (void)getCategoriesForUser:(User *)user completion:(void (^)(NSArray *allCategories, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"RecipieCategory"
@@ -266,61 +250,55 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
-        
-#warning What about passing to the completion just "fetchedObjects" arr and checking if there are any elements in the places where you're using it
-// Example:
-//        if (completion)
-//        {
-//            dispatch_async(currentQueue, ^{
-//                completion(fetchedObjects);
-//            });
-//        }
-
-        if ([fetchedObjects count] > 0)
-        {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects);
+        dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects, error);
                 });
-            }
-        }
-        else
-        {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
-                });
-            }
-        }
     });
 }
 
 #pragma mark - Recipe Managing Method
 
+- (void)updateRecipe:(Recipie *)oldRecipe withDataDictionary:(NSDictionary *)infoDictionary
+{
+    dispatch_async(q, ^{
+        oldRecipe.name = infoDictionary[@"name"];
+        oldRecipe.cookingTime = infoDictionary[@"cookingTime"];
+        oldRecipe.image = UIImagePNGRepresentation(infoDictionary[@"image"]);
+        oldRecipe.ingredients = infoDictionary[@"ingredients"];
+        oldRecipe.howToCook = infoDictionary[@"howToCook"];
+        
+        [self saveContext];
+    });
+}
+
 - (void)deleteRecipie:(Recipie *)recipie completion:(void (^)())completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_async(q, ^{
         [[self managedObjectContext] deleteObject:recipie];
         [self saveContext];
         
-        if (completion)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
                 completion();
             });
-        }
     });
 }
 
-- (void)getRecipieForName:(NSString *)name completion:(void (^)(Recipie *requestedRecipe))completion
+- (void)getRecipieForName:(NSString *)name completion:(void (^)(Recipie *requestedRecipe, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
@@ -332,47 +310,46 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+        
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] > 0)
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects[0]);
+            dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects[0], error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
+            dispatch_async(currentQueue, ^{
+                    completion(nil, error);
                 });
-            }
         }
     });
 }
 
-- (void)createRecipieWithInfoDictionary:(NSDictionary *)infoDictionary forUser:(User *)user andCategory:(RecipieCategory *)category completion:(void (^)(BOOL isRecipeCreated))completion
+- (void)createRecipieWithInfoDictionary:(NSDictionary *)infoDictionary forUser:(User *)user andCategory:(RecipieCategory *)category completion:(void (^)(BOOL isRecipeCreated, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
                                                   inManagedObjectContext:[self managedObjectContext]];
         [fetchRequest setEntity:entity];
         
-#warning @"recipeName" is more clear than just @"name"
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                   @"name == %@", infoDictionary[@"name"]];
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] == 0)
@@ -387,42 +364,34 @@ static dispatch_queue_t q;
             
             recipie.user = user;
             recipie.category = category;
+
+            [user addRecipiesObject:recipie];
             
-            
-#warning - (void)addCategoriesObject:(RecipieCategory *)value;
-            NSMutableArray *userRecipies = [NSMutableArray arrayWithArray:[user.recipies allObjects]];
-            [userRecipies addObject:recipie];
-            [user.recipies setByAddingObjectsFromArray:userRecipies];
-            
-#warning - (void)addRecipiesObject:(Recipie *)value;
-            NSMutableArray *categoryRecipies = [NSMutableArray arrayWithArray:[category.recipies allObjects]];
-            [categoryRecipies addObject:recipie];
-            [category.recipies setByAddingObjectsFromArray:categoryRecipies];
+            [category addRecipiesObject:recipie];
             
             [self saveContext];
             
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(YES);
+            dispatch_async(currentQueue, ^{
+                    completion(YES, error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                completion(NO);
-            }
+            dispatch_async(currentQueue, ^{
+                completion(NO, error);
+            });
         }
     });
 }
 
-- (void)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString completion:(void (^)(NSArray *recipes))completion
+- (void)getRecipesForUser:(User *)user withSearchString:(NSString *)searchString completion:(void (^)(NSArray *recipes, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
@@ -434,34 +403,24 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
-        if ([fetchedObjects count] > 0)
-        {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects);
+        dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects, error);
                 });
-            }
-        }
-        else
-        {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
-                });
-            }
-        }
     });
 }
 
-- (void)getRecipiesForCategory:(RecipieCategory *)category completion:(void (^)(NSArray *recipes))completion
+- (void)getRecipiesForCategory:(RecipieCategory *)category completion:(void (^)(NSArray *recipes, NSError *error))completion
 {
+    if (!completion)
+    {
+        return;
+    }
     dispatch_queue_t currentQueue = dispatch_get_main_queue();
     dispatch_async(q, ^{
-        NSError *error;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recipie"
@@ -473,25 +432,21 @@ static dispatch_queue_t q;
         
         [fetchRequest setPredicate:predicate];
         
+        NSError *error;
+
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
         if ([fetchedObjects count] > 0)
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(fetchedObjects);
+            dispatch_async(currentQueue, ^{
+                    completion(fetchedObjects, error);
                 });
-            }
         }
         else
         {
-            if (completion)
-            {
-                dispatch_async(currentQueue, ^{
-                    completion(nil);
+            dispatch_async(currentQueue, ^{
+                    completion(nil, error);
                 });
-            }
         }
     });
 }

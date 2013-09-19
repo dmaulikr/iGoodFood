@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Recipie.h"
 
 @interface RecipieCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *recipieImage;
 @property (weak, nonatomic) IBOutlet UILabel *recipieLabel;
+
+- (void)configureCellwithRecipe:(Recipie *)recipe;
 
 @end

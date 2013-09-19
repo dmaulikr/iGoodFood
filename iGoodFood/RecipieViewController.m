@@ -16,12 +16,11 @@
 @interface RecipieViewController ()
 {
     NSMutableArray *recipies;
-    
-#warning Why this one isn't a property? Should it be strong/weak;
-#warning What is the default ownership for ivars?
-    Recipie *selectedRecipie;
 }
 
+@property (strong, nonatomic) Recipie *selectedRecipie;
+
+-(IBAction)addRecipieButtonPressed;
 
 @end
 
@@ -33,14 +32,7 @@
     
     self.navigationItem.title = self.currentCategory.name;
     
-    UIBarButtonItem *addRecipieButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRecipieButtonPressed)];
-    
-    self.navigationItem.rightBarButtonItem = addRecipieButton;
-    
-    
-#warning What is the purpose to invoke this method here and in viewDidAppear?
     self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
-    [self loadRecipies];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -49,8 +41,6 @@
     
     [self loadRecipies];
 }
-
-
 
 -(IBAction)addRecipieButtonPressed
 {
@@ -65,8 +55,8 @@
         
         RecipieCell *cell = (RecipieCell *)recognizer.view;
         
-        [[DataModel sharedModel] getRecipieForName:cell.recipieLabel.text completion:^(Recipie *requestedRecipe) {
-            selectedRecipie = requestedRecipe;
+        [[DataModel sharedModel] getRecipieForName:cell.recipieLabel.text completion:^(Recipie *requestedRecipe, NSError *error) {
+            self.selectedRecipie = requestedRecipe;
         }];
     }
 }
@@ -76,7 +66,7 @@
     if ([segue.destinationViewController isKindOfClass:[DetailRecipieViewController class]])
     {
         DetailRecipieViewController *destination = (DetailRecipieViewController *)segue.destinationViewController;
-        destination.currentRecipie = selectedRecipie;
+        destination.currentRecipie = self.selectedRecipie;
     }
     else if ([segue.destinationViewController isKindOfClass:[AddRecipieViewController class]])
     {
@@ -89,7 +79,7 @@
 
 - (void)loadRecipies
 {
-    [[DataModel sharedModel] getRecipiesForCategory:self.currentCategory completion:^(NSArray *recipes) {
+    [[DataModel sharedModel] getRecipiesForCategory:self.currentCategory completion:^(NSArray *recipes, NSError *error) {
         recipies = [NSMutableArray arrayWithArray:recipes];
         [self.collectionView reloadData];
     }];
@@ -107,26 +97,19 @@
     static NSString *cellIdentifier = @"recipieCell";
     
     RecipieCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    
-    cell.recipieLabel.text = [(Recipie *)recipies[indexPath.row] name];
-    cell.recipieLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
-
-    cell.recipieImage.image = [UIImage imageWithData:[(Recipie *)recipies[indexPath.row] image]];
-    cell.recipieImage.contentMode = UIViewContentModeScaleAspectFit;
+    Recipie *recipe = (Recipie *)recipies[indexPath.row];
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.recipieImage.layer.cornerRadius = 5;
-    cell.recipieImage.clipsToBounds = YES;
+    [cell configureCellwithRecipe:recipe];
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedRecipie = recipies[indexPath.row];
+    self.selectedRecipie = recipies[indexPath.row];
     [self performSegueWithIdentifier:@"toDetailRecipie" sender:self];
 }
 
@@ -136,7 +119,7 @@
 {
     if (buttonIndex == 0)
     {
-        [[DataModel sharedModel] deleteRecipie:selectedRecipie completion:^{
+        [[DataModel sharedModel] deleteRecipie:self.selectedRecipie completion:^{
             [self loadRecipies];
         }];
     }
