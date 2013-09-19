@@ -39,6 +39,7 @@
     
     
 #warning What is the purpose to invoke this method here and in viewDidAppear?
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     [self loadRecipies];
 }
 
@@ -64,7 +65,9 @@
         
         RecipieCell *cell = (RecipieCell *)recognizer.view;
         
-        selectedRecipie = [DataModel getRecipieForName:cell.recipieLabel.text];
+        [[DataModel sharedModel] getRecipieForName:cell.recipieLabel.text completion:^(Recipie *requestedRecipe) {
+            selectedRecipie = requestedRecipe;
+        }];
     }
 }
 
@@ -86,8 +89,10 @@
 
 - (void)loadRecipies
 {
-    recipies = [NSMutableArray arrayWithArray:[DataModel getRecipiesForCategory:self.currentCategory]];
-    [self.collectionView reloadData];
+    [[DataModel sharedModel] getRecipiesForCategory:self.currentCategory completion:^(NSArray *recipes) {
+        recipies = [NSMutableArray arrayWithArray:recipes];
+        [self.collectionView reloadData];
+    }];
 }
 
 #pragma mark - Collection View Delegate & DataSource Methods
@@ -105,13 +110,15 @@
     
     
     cell.recipieLabel.text = [(Recipie *)recipies[indexPath.row] name];
+    cell.recipieLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+
     cell.recipieImage.image = [UIImage imageWithData:[(Recipie *)recipies[indexPath.row] image]];
     cell.recipieImage.contentMode = UIViewContentModeScaleAspectFit;
     
     UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.recipieImage.layer.cornerRadius = 30;
+    cell.recipieImage.layer.cornerRadius = 5;
     cell.recipieImage.clipsToBounds = YES;
     
     return cell;
@@ -129,8 +136,9 @@
 {
     if (buttonIndex == 0)
     {
-        [DataModel deleteRecipie:selectedRecipie];
-        [self loadRecipies];
+        [[DataModel sharedModel] deleteRecipie:selectedRecipie completion:^{
+            [self loadRecipies];
+        }];
     }
 }
 

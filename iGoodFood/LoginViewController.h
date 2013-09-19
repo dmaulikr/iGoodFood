@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
-
-@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 @end

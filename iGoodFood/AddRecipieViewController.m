@@ -8,13 +8,13 @@
 
 #import "AddRecipieViewController.h"
 #import "DataModel.h"
-#import "TextAnalyzer.h"
 
 @interface AddRecipieViewController ()
-
+{
+    BOOL changedImage;
+}
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentIndicator;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UITextField *descriptionField;
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -34,8 +34,9 @@
 {
     [super viewDidLoad];
     
+    changedImage = NO;
+    
     self.nameField.delegate = self;
-    self.descriptionField.delegate = self;
     self.timeField.delegate = self;
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
@@ -44,13 +45,19 @@
     if (self.recipieToEdit != nil)
     {
         self.nameField.text = self.recipieToEdit.name;
-        self.descriptionField.text = self.recipieToEdit.recipieDescription;
         self.timeField.text = [NSString stringWithFormat:@"%d", [self.recipieToEdit.cookingTime integerValue]];
         self.imageView.image = [UIImage imageWithData:self.recipieToEdit.image];
         self.ingredientsField.text = self.recipieToEdit.ingredients;
         self.howToField.text = self.recipieToEdit.howToCook;
     }
     
+    self.ingredientsField.layer.cornerRadius = 3;
+    self.howToField.layer.cornerRadius = 3;
+    
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    
+    self.ingredientsField.tintColor = [UIColor whiteColor];
+    self.howToField.tintColor = [UIColor whiteColor];
 }
 
 #pragma mark - IBAction Methods
@@ -72,7 +79,6 @@
         [self.howToField resignFirstResponder];
         
         self.nameField.hidden = NO;
-        self.descriptionField.hidden = NO;
         self.timeField.hidden = NO;
         self.timeLabel.hidden = NO;
         self.imageView.hidden = NO;
@@ -80,27 +86,27 @@
     else if (self.segmentIndicator.selectedSegmentIndex == 1)
     {
         self.ingredientsField.hidden = NO;
-        [self.ingredientsField becomeFirstResponder];
         
         self.howToField.hidden = YES;
         
         self.nameField.hidden = YES;
-        self.descriptionField.hidden = YES;
         self.timeField.hidden = YES;
         self.timeLabel.hidden = YES;
         self.imageView.hidden = YES;
+        
+        [self.ingredientsField becomeFirstResponder];
     }
     else
     {
         self.ingredientsField.hidden = YES;
         self.howToField.hidden = NO;
-        [self.howToField becomeFirstResponder];
         
         self.nameField.hidden = YES;
-        self.descriptionField.hidden = YES;
         self.timeField.hidden = YES;
         self.timeLabel.hidden = YES;
         self.imageView.hidden = YES;
+        
+        [self.howToField becomeFirstResponder];
 
     }
         
@@ -116,51 +122,36 @@
     if (self.recipieToEdit != nil && ![self.nameField.text isEqualToString:@""])
     {
         self.recipieToEdit.name = self.nameField.text;
-        self.recipieToEdit.recipieDescription = self.descriptionField.text;
         self.recipieToEdit.cookingTime = [NSNumber numberWithInteger:[self.timeField.text integerValue]];
         self.recipieToEdit.image = UIImagePNGRepresentation(self.imageView.image);
         self.recipieToEdit.ingredients = self.ingredientsField.text;
         self.recipieToEdit.howToCook = self.howToField.text;
         
-        [DataModel saveContext];
-        
-        [TextAnalyzer analyzeText:[NSString stringWithFormat:@"%@ %@", self.howToField.text, self.ingredientsField.text] withCompletion:^(NSMutableArray *tags) {
-            NSLog(@"%@", tags);
-            
-            [DataModel addTagsFromArray:tags forRecipe:[DataModel getRecipieForName:self.nameField.text]];
-        }];
-        
+        [[DataModel sharedModel] saveContext];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
-        if ([DataModel createRecipieWithName:self.nameField.text
-                                 description:self.descriptionField.text
-                                 cookingTime:[self.timeField.text integerValue]
-                                       image:self.imageView.image
-                                 ingredients:self.ingredientsField.text
-                                   howToCook:self.howToField.text
-                                     forUser:self.currentUser
-                                 andCategory:self.currentCategory] && ![self.nameField.text isEqualToString:@""])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipie added!" message:@"Your recipie was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            
-            [TextAnalyzer analyzeText:[NSString stringWithFormat:@"%@ %@", self.howToField.text, self.ingredientsField.text] withCompletion:^(NSMutableArray *tags) {
-                NSLog(@"%@", tags);
+        NSDictionary *infoDict = @{@"name" : self.nameField.text,
+                                   @"cookingTime" : [NSNumber numberWithInteger:[self.timeField.text integerValue]],
+                                   @"image" : (changedImage ? self.imageView.image : [UIImage imageNamed:@"recipie.png"]),
+                                   @"ingredients" : self.ingredientsField.text,
+                                   @"howToCook" : self.howToField.text};
+        [[DataModel sharedModel] createRecipieWithInfoDictionary:infoDict forUser:self.currentUser andCategory:self.currentCategory completion:^(BOOL isRecipeCreated) {
+            if (isRecipeCreated)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recipe added!" message:@"Your recipe was added successfully." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
                 
-                [DataModel addTagsFromArray:tags forRecipe:[DataModel getRecipieForName:self.nameField.text]];
-            }];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipie." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Could not add recipe." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }];
     }
-    
 }
 
 #pragma mark - Keyboard Dismiss
@@ -210,6 +201,8 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    changedImage = YES;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

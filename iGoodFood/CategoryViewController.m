@@ -12,12 +12,18 @@
 #import "RecipieCategory.h"
 #import "RecipieViewController.h"
 #import "Recipie.h"
+#import "DetailRecipieViewController.h"
 
 @interface CategoryViewController ()
 {
     NSMutableArray *categories;
     RecipieCategory *selectedCategory;
+    NSMutableArray *allRecipes;
+    Recipie *selectedRecipe;
 }
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -26,17 +32,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logOutButtonPressed)];
+    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(logOutButtonPressed)];
     self.navigationItem.leftBarButtonItem = logOutButton;
     
-    UIBarButtonItem *addCategoryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCategoryButtonPressed)];
+    UIBarButtonItem *addCategoryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                       target:self
+                                                                                       action:@selector(addCategoryButtonPressed)];
     self.navigationItem.rightBarButtonItem = addCategoryButton;
     
     self.title = @"Categories";
     
-    [self loadCategories];
+    self.searchDisplayController.delegate = self;
+    
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    self.searchBar.barTintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
+    self.searchBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -50,9 +64,14 @@
 
 - (void)loadCategories
 {
-    categories = [NSMutableArray arrayWithArray:[DataModel getCategoriesForUser:self.currentUser]];
-    [self.collectionView reloadData];
+    [[DataModel sharedModel] getCategoriesForUser:self.currentUser completion:^(NSArray *allCategories) {
+        categories = [NSMutableArray arrayWithArray:allCategories];
+        
+        [self.collectionView reloadData];
+    }];
 }
+
+#pragma mark - IBAction Methods
 
 - (IBAction)logOutButtonPressed
 {
@@ -69,20 +88,34 @@
 
 - (IBAction)addCategoryButtonPressed
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Category" message:@"Enter category name:" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Category name:"
+                                                    message:@""
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:@"Cancel", nil];
+    
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
     [alert show];
 }
 
 - (void)categoryLongPressed:(UIGestureRecognizer *)recognizer
 {
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"What do you want?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"What do you want?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:@"Delete"
+                                                  otherButtonTitles: nil];
+        
         [sheet showInView:recognizer.view];
         
         CategoryCell *cell = (CategoryCell *)recognizer.view;
         
-        selectedCategory = [DataModel getCategoryForName:cell.categoryNameLabel.text];
+        [[DataModel sharedModel] getCategoryForName:cell.categoryNameLabel.text completion:^(RecipieCategory *newCategory) {
+            selectedCategory = newCategory;
+        }];
     }
 }
 
@@ -96,21 +129,31 @@
         
         if ([categoryName isEqualToString:@""] || categoryName == nil)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Can't create category with blank name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                            message:@"Can't create category with blank name."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
             [alert show];
         }
         else
         {
-            if ([DataModel createCategoryWithName:categoryName forUser:self.currentUser])
-            {
-                NSLog(@"Category added");
-                [self loadCategories];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Category with this name already exists!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-            }
+            [[DataModel sharedModel] createCategoryWithName:categoryName forUser:self.currentUser completion:^(BOOL isCategoryCreated) {
+                if (isCategoryCreated)
+                {
+                    [self loadCategories];
+                }
+                else
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                                    message:@"Category with this name already exists!"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles: nil];
+                    
+                    [alert show];
+                }
+            }];
         }
     }
 }
@@ -127,17 +170,15 @@
     static NSString *cellIdentifier = @"categoryCell";
     
     CategoryCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
     
-    cell.categoryNameLabel.text = [(RecipieCategory *)categories[indexPath.row] name];
+    cell.categoryNameLabel.text = category.name;
     
-    if ([[(RecipieCategory *)categories[indexPath.row] recipies] count] > 0)
+    if (category.recipies.count > 0)
     {
-        RecipieCategory *category = (RecipieCategory *)categories[indexPath.row];
         Recipie *recipie = (Recipie *)[[category.recipies allObjects] objectAtIndex:0];
         
-        NSData *imageData = recipie.image;
-        
-        cell.categoryImage.image = [UIImage imageWithData:imageData];
+        cell.categoryImage.image = [UIImage imageWithData:recipie.image];
     }
     else
     {
@@ -145,11 +186,13 @@
         cell.categoryImage.contentMode = UIViewContentModeScaleAspectFit;
     }
 
+    cell.categoryNameLabel.textColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     
-    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLongPressed:)];
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(categoryLongPressed:)];
     [cell addGestureRecognizer:longPressRecognizer];
     
-    cell.categoryImage.layer.cornerRadius = 15;
+    cell.categoryImage.layer.cornerRadius = 3;
     cell.categoryImage.clipsToBounds = YES;
     
     return cell;
@@ -161,12 +204,23 @@
     [self performSegueWithIdentifier:@"toRecipieView" sender:self];
 }
 
+#pragma mark - Segue Methods
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    RecipieViewController *destination = (RecipieViewController *)segue.destinationViewController;
-    
-    destination.currentUser = self.currentUser;
-    destination.currentCategory = selectedCategory;
+    if ([segue.destinationViewController isKindOfClass:[RecipieViewController class]])
+    {
+        RecipieViewController *destination = (RecipieViewController *)segue.destinationViewController;
+        
+        destination.currentUser = self.currentUser;
+        destination.currentCategory = selectedCategory;
+    }
+    else if([segue.destinationViewController isKindOfClass:[DetailRecipieViewController class]])
+    {
+        DetailRecipieViewController *destination = (DetailRecipieViewController *)segue.destinationViewController;
+        
+        destination.currentRecipie = selectedRecipe;
+    }
 }
 
 #pragma mark - Action Sheet Delegate Methods
@@ -175,9 +229,68 @@
 {
     if (buttonIndex == 0)
     {
-        [DataModel deleteCategory:selectedCategory];
-        [self loadCategories];
+        [[DataModel sharedModel] deleteCategory:selectedCategory completion:^{
+            [self loadCategories];
+        }];
     }
+}
+
+#pragma mark - UISearchBar Delegate
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar setText:@""];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+}
+
+#pragma mark - UITableView Data Source & Delegate
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [allRecipes count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    }
+    
+    Recipie *cellRecipie = (Recipie *) allRecipes[indexPath.row];
+    
+    cell.textLabel.text = cellRecipie.name;
+    cell.imageView.image = [UIImage imageWithData:cellRecipie.image];
+    cell.detailTextLabel.text = [(RecipieCategory *)cellRecipie.category name];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedRecipe = (Recipie *)allRecipes[indexPath.row];
+    [self performSegueWithIdentifier:@"toDetail" sender:self];
+}
+
+#pragma mark - Search Display Delegate
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [[DataModel sharedModel] getRecipesForUser:self.currentUser withSearchString:searchString completion:^(NSArray *recipes) {
+        allRecipes = [NSMutableArray arrayWithArray:recipes];
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }];
+
+    return NO;
 }
 
 @end

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55081C6A17E87F3D00EF36B5 /* RecipieCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6917E87F3D00EF36B5 /* RecipieCategory.m */; };
+		55081C6D17E87F3E00EF36B5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6C17E87F3E00EF36B5 /* User.m */; };
+		55081C7017E87F3E00EF36B5 /* Recipie.m in Sources */ = {isa = PBXBuildFile; fileRef = 55081C6F17E87F3E00EF36B5 /* Recipie.m */; };
+		55081C7717E8A44500EF36B5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55081C7517E8A44500EF36B5 /* Icon.png */; };
+		55081C7817E8A44500EF36B5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55081C7617E8A44500EF36B5 /* Icon@2x.png */; };
 		550F1FFD17E6FA0900047C1A /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 550F1FFC17E6FA0900047C1A /* add.png */; };
-		550F200917E706E200047C1A /* RecipieCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F200817E706E200047C1A /* RecipieCategory.m */; };
-		550F200C17E706E300047C1A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F200B17E706E300047C1A /* User.m */; };
 		550F201517E715A000047C1A /* DetailRecipieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F201417E715A000047C1A /* DetailRecipieViewController.m */; };
-		550F201917E74B2300047C1A /* TextAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F201817E74B2300047C1A /* TextAnalyzer.m */; };
-		550F201C17E7500400047C1A /* Recipie.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F201B17E7500400047C1A /* Recipie.m */; };
-		550F201F17E7500400047C1A /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 550F201E17E7500400047C1A /* Tag.m */; };
 		5592A19017E367D600288BB9 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A18F17E367D600288BB9 /* CategoryCell.m */; };
 		5592A19217E36C0600288BB9 /* recipie.png in Resources */ = {isa = PBXBuildFile; fileRef = 5592A19117E36C0600288BB9 /* recipie.png */; };
 		5592A19517E36E0900288BB9 /* RecipieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5592A19417E36E0900288BB9 /* RecipieViewController.m */; };
@@ -53,19 +53,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55081C6817E87F3D00EF36B5 /* RecipieCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipieCategory.h; sourceTree = "<group>"; };
+		55081C6917E87F3D00EF36B5 /* RecipieCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipieCategory.m; sourceTree = "<group>"; };
+		55081C6B17E87F3E00EF36B5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		55081C6C17E87F3E00EF36B5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		55081C6E17E87F3E00EF36B5 /* Recipie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipie.h; sourceTree = "<group>"; };
+		55081C6F17E87F3E00EF36B5 /* Recipie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipie.m; sourceTree = "<group>"; };
+		55081C7517E8A44500EF36B5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		55081C7617E8A44500EF36B5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		550F1FFC17E6FA0900047C1A /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
-		550F200717E706E200047C1A /* RecipieCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipieCategory.h; sourceTree = "<group>"; };
-		550F200817E706E200047C1A /* RecipieCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipieCategory.m; sourceTree = "<group>"; };
-		550F200A17E706E300047C1A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		550F200B17E706E300047C1A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		550F201317E715A000047C1A /* DetailRecipieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailRecipieViewController.h; sourceTree = "<group>"; };
 		550F201417E715A000047C1A /* DetailRecipieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailRecipieViewController.m; sourceTree = "<group>"; };
-		550F201717E74B2300047C1A /* TextAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextAnalyzer.h; sourceTree = "<group>"; };
-		550F201817E74B2300047C1A /* TextAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextAnalyzer.m; sourceTree = "<group>"; };
-		550F201A17E7500400047C1A /* Recipie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipie.h; sourceTree = "<group>"; };
-		550F201B17E7500400047C1A /* Recipie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipie.m; sourceTree = "<group>"; };
-		550F201D17E7500400047C1A /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		550F201E17E7500400047C1A /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		5592A18E17E367D600288BB9 /* CategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCell.h; sourceTree = "<group>"; };
 		5592A18F17E367D600288BB9 /* CategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
 		5592A19117E36C0600288BB9 /* recipie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recipie.png; sourceTree = "<group>"; };
@@ -132,6 +130,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55081C7917E8BA7400EF36B5 /* CategoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5592A18E17E367D600288BB9 /* CategoryCell.h */,
+				5592A18F17E367D600288BB9 /* CategoryCell.m */,
+			);
+			name = CategoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		55081C7A17E8BA8A00EF36B5 /* RecipeCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5592A19717E36F8C00288BB9 /* RecipieCell.h */,
+				5592A19817E36F8C00288BB9 /* RecipieCell.m */,
+			);
+			name = RecipeCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		550F201617E7350700047C1A /* DetailRecipieViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,8 +162,9 @@
 			children = (
 				5592A19317E36E0900288BB9 /* RecipieViewController.h */,
 				5592A19417E36E0900288BB9 /* RecipieViewController.m */,
-				5592A19717E36F8C00288BB9 /* RecipieCell.h */,
-				5592A19817E36F8C00288BB9 /* RecipieCell.m */,
+				550F201617E7350700047C1A /* DetailRecipieViewController */,
+				5592A19D17E372BD00288BB9 /* AddRecipieViewController */,
+				55081C7A17E8BA8A00EF36B5 /* RecipeCollectionViewCell */,
 			);
 			name = RecipieViewController;
 			sourceTree = "<group>";
@@ -198,15 +215,10 @@
 				55D3378817E33A0F00B9A64E /* App Delegate */,
 				55D3374F17E32B8100B9A64E /* Main.storyboard */,
 				55D3378A17E33A2B00B9A64E /* LoginViewController */,
-				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 				55D337AB17E34ECD00B9A64E /* CategoryViewController */,
 				5592A19617E36F6B00288BB9 /* RecipieViewController */,
-				5592A19D17E372BD00288BB9 /* AddRecipieViewController */,
 				55D3378F17E34A0000B9A64E /* DataModel */,
 				55D3374417E32B8100B9A64E /* Supporting Files */,
-				550F201717E74B2300047C1A /* TextAnalyzer.h */,
-				550F201817E74B2300047C1A /* TextAnalyzer.m */,
-				550F201617E7350700047C1A /* DetailRecipieViewController */,
 			);
 			path = iGoodFood;
 			sourceTree = "<group>";
@@ -214,6 +226,8 @@
 		55D3374417E32B8100B9A64E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55081C7517E8A44500EF36B5 /* Icon.png */,
+				55081C7617E8A44500EF36B5 /* Icon@2x.png */,
 				550F1FFC17E6FA0900047C1A /* add.png */,
 				5592A19117E36C0600288BB9 /* recipie.png */,
 				55D337BB17E35D6D00B9A64E /* NSString+Encrypt.h */,
@@ -259,6 +273,7 @@
 			children = (
 				55D3377917E32C0700B9A64E /* LoginViewController.h */,
 				55D3377A17E32C0700B9A64E /* LoginViewController.m */,
+				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 			);
 			name = LoginViewController;
 			sourceTree = "<group>";
@@ -278,14 +293,12 @@
 				55D3375217E32B8100B9A64E /* iGoodFood.xcdatamodeld */,
 				55D337A817E34E5900B9A64E /* DataModel.h */,
 				55D337A917E34E5900B9A64E /* DataModel.m */,
-				550F200A17E706E300047C1A /* User.h */,
-				550F200B17E706E300047C1A /* User.m */,
-				550F200717E706E200047C1A /* RecipieCategory.h */,
-				550F200817E706E200047C1A /* RecipieCategory.m */,
-				550F201D17E7500400047C1A /* Tag.h */,
-				550F201E17E7500400047C1A /* Tag.m */,
-				550F201A17E7500400047C1A /* Recipie.h */,
-				550F201B17E7500400047C1A /* Recipie.m */,
+				55081C6E17E87F3E00EF36B5 /* Recipie.h */,
+				55081C6F17E87F3E00EF36B5 /* Recipie.m */,
+				55081C6B17E87F3E00EF36B5 /* User.h */,
+				55081C6C17E87F3E00EF36B5 /* User.m */,
+				55081C6817E87F3D00EF36B5 /* RecipieCategory.h */,
+				55081C6917E87F3D00EF36B5 /* RecipieCategory.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -293,10 +306,9 @@
 		55D337AB17E34ECD00B9A64E /* CategoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5592A18E17E367D600288BB9 /* CategoryCell.h */,
-				5592A18F17E367D600288BB9 /* CategoryCell.m */,
 				55D3379017E34A5E00B9A64E /* CategoryViewController.h */,
 				55D3379117E34A5E00B9A64E /* CategoryViewController.m */,
+				55081C7917E8BA7400EF36B5 /* CategoryCollectionViewCell */,
 			);
 			name = CategoryViewController;
 			sourceTree = "<group>";
@@ -377,7 +389,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55081C7717E8A44500EF36B5 /* Icon.png in Resources */,
 				55D3375C17E32B8100B9A64E /* Images.xcassets in Resources */,
+				55081C7817E8A44500EF36B5 /* Icon@2x.png in Resources */,
 				550F1FFD17E6FA0900047C1A /* add.png in Resources */,
 				5592A19217E36C0600288BB9 /* recipie.png in Resources */,
 				55D3374817E32B8100B9A64E /* InfoPlist.strings in Resources */,
@@ -400,24 +414,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550F201F17E7500400047C1A /* Tag.m in Sources */,
-				550F200917E706E200047C1A /* RecipieCategory.m in Sources */,
 				55D337BD17E35D6D00B9A64E /* NSString+Encrypt.m in Sources */,
 				55D3379217E34A5E00B9A64E /* CategoryViewController.m in Sources */,
 				55D337AA17E34E5900B9A64E /* DataModel.m in Sources */,
 				5592A19C17E371B300288BB9 /* AddRecipieViewController.m in Sources */,
 				55D3377B17E32C0700B9A64E /* LoginViewController.m in Sources */,
+				55081C7017E87F3E00EF36B5 /* Recipie.m in Sources */,
+				55081C6D17E87F3E00EF36B5 /* User.m in Sources */,
+				55081C6A17E87F3D00EF36B5 /* RecipieCategory.m in Sources */,
 				55D3378417E333AF00B9A64E /* SignUpViewController.m in Sources */,
 				5592A19517E36E0900288BB9 /* RecipieViewController.m in Sources */,
-				550F200C17E706E300047C1A /* User.m in Sources */,
 				55D3375417E32B8100B9A64E /* iGoodFood.xcdatamodeld in Sources */,
 				5592A19017E367D600288BB9 /* CategoryCell.m in Sources */,
 				550F201517E715A000047C1A /* DetailRecipieViewController.m in Sources */,
 				5592A19917E36F8C00288BB9 /* RecipieCell.m in Sources */,
-				550F201917E74B2300047C1A /* TextAnalyzer.m in Sources */,
 				55D3374E17E32B8100B9A64E /* AppDelegate.m in Sources */,
 				55D3374A17E32B8100B9A64E /* main.m in Sources */,
-				550F201C17E7500400047C1A /* Recipie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

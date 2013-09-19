@@ -36,6 +36,14 @@
                                                                     target:self
                                                                     action:@selector(signUpButtonPressed)];
     self.navigationItem.rightBarButtonItem = signUpButton;
+    
+    self.userNameTextField.delegate = self;
+    self.passTextField.delegate = self;    
+
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -46,12 +54,16 @@
     
     if ([[defaults objectForKey:@"rememberMe"] boolValue])
     {
-        if ((user = [DataModel getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"]]) != nil)
-        {
-            [self performSegueWithIdentifier:@"toCategoryView" sender:self];
-        }
+        [[DataModel sharedModel] getUserForUsername:[defaults objectForKey:@"username"] andPassword:[defaults objectForKey:@"password"] completion:^(User *newUser) {
+            if ((user = newUser))
+            {
+                [self performSegueWithIdentifier:@"toCategoryView" sender:self];
+            }
+        }];
     }
 }
+
+#pragma mark - IBAction Methods
 
 - (IBAction)signUpButtonPressed
 {
@@ -61,16 +73,20 @@
 
 - (IBAction)loginButtonPressed:(id)sender
 {
-    if ((user = [DataModel getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt]]) != nil)
-    {
-        [self performSegueWithIdentifier:@"toCategoryView" sender:self];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Invalid username or password!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-    }
+    [[DataModel sharedModel] getUserForUsername:self.userNameTextField.text andPassword:[self.passTextField.text encrypt] completion:^(User *newUser) {
+        if ((user = newUser))
+        {
+            [self performSegueWithIdentifier:@"toCategoryView" sender:self];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Invalid username or password!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
+
+#pragma mark - Segue Methods
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -89,4 +105,18 @@
         [defaults synchronize];
     }
 }
+
+#pragma mark - Keyboard Dismiss
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 @end
