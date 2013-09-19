@@ -78,6 +78,9 @@
         [self.ingredientsField resignFirstResponder];
         [self.howToField resignFirstResponder];
         
+        
+#warning Extract these in separate method:
+#warning Ex. hideBasicInfoTextFields:(BOOL)hidden;
         self.nameField.hidden = NO;
         self.timeField.hidden = NO;
         self.timeLabel.hidden = NO;
@@ -121,7 +124,12 @@
 {
     if (self.recipieToEdit != nil && ![self.nameField.text isEqualToString:@""])
     {
+        
+        
+#warning You should have method in the DataManager -> updateRecipe:(Recipe*)oldRecipe newRecipe:(Recipe*)newRecipe completion...
+#warning Don't update it by yourself, this is work of the DataManeger
         self.recipieToEdit.name = self.nameField.text;
+#warning Literalls, literals everywhere :D
         self.recipieToEdit.cookingTime = [NSNumber numberWithInteger:[self.timeField.text integerValue]];
         self.recipieToEdit.image = UIImagePNGRepresentation(self.imageView.image);
         self.recipieToEdit.ingredients = self.ingredientsField.text;

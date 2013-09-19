@@ -33,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    
+#warning Why didn't add these buttons in IB
     UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
@@ -174,6 +176,9 @@
     
     cell.categoryNameLabel.text = category.name;
     
+    
+#warning To be more encapsulated it's better to make a custom method of CategoryCell with which to configure the cell
+//Example: configureWithRecipe:(Recipe*)aRecipe
     if (category.recipies.count > 0)
     {
         Recipie *recipie = (Recipie *)[[category.recipies allObjects] objectAtIndex:0];
@@ -259,7 +264,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    
+#warning if (!cell)
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];

@@ -43,6 +43,14 @@ static dispatch_queue_t q;
 }
 
 
+#warning In the methods that must return some meaningfull result it's better to put at the beggining 
+#warning something like guard. In this case you'll not doing unnecessary computations
+//if (!completion)
+//{
+//    return;
+//}
+
+
 #pragma mark - User Managing Methods
 
 - (void)createUserWithName:(NSString *)fullName username:(NSString *)username andPassword:(NSString *)password completion:(void (^)(BOOL userCreated))completion
@@ -213,6 +221,9 @@ static dispatch_queue_t q;
             category.name = categoryName;
             category.user = user;
             
+            
+#warning mMMM I'm not sure what was your idea but... at least you've - (void)addCategoriesObject:(RecipieCategory *)value; in User obj
+
             NSMutableArray *userCategories = [NSMutableArray arrayWithArray:[user.categories allObjects]];
             [userCategories addObject:category];
             [user.categories setByAddingObjectsFromArray:userCategories];
@@ -257,6 +268,16 @@ static dispatch_queue_t q;
         
         NSArray *fetchedObjects = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
         
+        
+#warning What about passing to the completion just "fetchedObjects" arr and checking if there are any elements in the places where you're using it
+// Example:
+//        if (completion)
+//        {
+//            dispatch_async(currentQueue, ^{
+//                completion(fetchedObjects);
+//            });
+//        }
+
         if ([fetchedObjects count] > 0)
         {
             if (completion)
@@ -346,6 +367,7 @@ static dispatch_queue_t q;
                                                   inManagedObjectContext:[self managedObjectContext]];
         [fetchRequest setEntity:entity];
         
+#warning @"recipeName" is more clear than just @"name"
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                   @"name == %@", infoDictionary[@"name"]];
         
@@ -366,10 +388,13 @@ static dispatch_queue_t q;
             recipie.user = user;
             recipie.category = category;
             
+            
+#warning - (void)addCategoriesObject:(RecipieCategory *)value;
             NSMutableArray *userRecipies = [NSMutableArray arrayWithArray:[user.recipies allObjects]];
             [userRecipies addObject:recipie];
             [user.recipies setByAddingObjectsFromArray:userRecipies];
             
+#warning - (void)addRecipiesObject:(Recipie *)value;
             NSMutableArray *categoryRecipies = [NSMutableArray arrayWithArray:[category.recipies allObjects]];
             [categoryRecipies addObject:recipie];
             [category.recipies setByAddingObjectsFromArray:categoryRecipies];

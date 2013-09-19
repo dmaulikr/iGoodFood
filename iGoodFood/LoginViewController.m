@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passTextField;
 @property (weak, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
 
+#warning This declaration in not needed
 - (IBAction)loginButtonPressed:(id)sender;
 
 @end
@@ -100,6 +101,8 @@
         
         [defaults setObject:user.username forKey:@"username"];
         [defaults setObject:user.password forKey:@"password"];
+        
+#warning Use Literals - [NSNumber numberWithBool:self.rememberMeSwitch.isOn] => @(self.rememberMeSwitch.isOn)
         [defaults setObject:[NSNumber numberWithBool:self.rememberMeSwitch.isOn] forKey:@"rememberMe"];
         
         [defaults synchronize];

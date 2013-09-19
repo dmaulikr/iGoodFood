@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *repeatPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *fullNameTextField;
 
+#warning Nice One! Bravi
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @end
@@ -53,6 +54,10 @@
 
 - (IBAction)signUpButtonPressed
 {
+    
+#warning At all this logic is valid only for the passwords. Pesho.length < 6, but is valid name. 
+#warning You still permit to sign up with something like this @"       "
+    
     for (UITextField *textField in self.textFields)
     {
         if ([textField.text isEqualToString:@""] || [textField.text length] < 6)

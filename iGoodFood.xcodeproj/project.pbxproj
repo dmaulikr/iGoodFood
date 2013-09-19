@@ -215,6 +215,7 @@
 				55D3378817E33A0F00B9A64E /* App Delegate */,
 				55D3374F17E32B8100B9A64E /* Main.storyboard */,
 				55D3378A17E33A2B00B9A64E /* LoginViewController */,
+				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 				55D337AB17E34ECD00B9A64E /* CategoryViewController */,
 				5592A19617E36F6B00288BB9 /* RecipieViewController */,
 				55D3378F17E34A0000B9A64E /* DataModel */,
@@ -273,7 +274,6 @@
 			children = (
 				55D3377917E32C0700B9A64E /* LoginViewController.h */,
 				55D3377A17E32C0700B9A64E /* LoginViewController.m */,
-				55D3378B17E33A3A00B9A64E /* SignUpViewController */,
 			);
 			name = LoginViewController;
 			sourceTree = "<group>";
