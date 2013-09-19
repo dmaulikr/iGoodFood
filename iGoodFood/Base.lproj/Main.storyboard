@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -253,20 +253,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yB-tq-Yl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="F0V-nV-mvq">
-                    <connections>
-                        <outlet property="searchContentsController" destination="8P5-Ce-8xY" id="tSi-Fd-AQF"/>
-                        <outlet property="searchResultsDataSource" destination="8P5-Ce-8xY" id="hhP-yM-iLJ"/>
-                        <outlet property="searchResultsDelegate" destination="8P5-Ce-8xY" id="aTy-f6-tNh"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="Hnh-E7-hHS">
-                    <connections>
-                        <outlet property="searchContentsController" destination="8P5-Ce-8xY" id="4OJ-PJ-Mik"/>
-                        <outlet property="searchResultsDataSource" destination="8P5-Ce-8xY" id="YLk-iz-oHy"/>
-                        <outlet property="searchResultsDelegate" destination="8P5-Ce-8xY" id="7jy-Fm-3FH"/>
-                    </connections>
-                </searchDisplayController>
                 <searchDisplayController id="iJZ-vC-fsa">
                     <connections>
                         <outlet property="delegate" destination="8P5-Ce-8xY" id="hsI-uK-VRg"/>

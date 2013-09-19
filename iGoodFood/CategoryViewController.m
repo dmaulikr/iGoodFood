@@ -51,7 +51,6 @@
     self.view.tintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     self.searchBar.barTintColor = [UIColor colorWithRed:0.322 green:0.749 blue:0.627 alpha:1.0];
     self.searchBar.tintColor = [UIColor whiteColor];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
